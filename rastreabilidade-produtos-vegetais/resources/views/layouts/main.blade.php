@@ -31,7 +31,7 @@
                 <a class="nav-link" href="/rastreamento">Rastrear Lote</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/lote/create">Cadastrar Lote</a>
+                <a class="nav-link" href="/lote">Cadastrar Lote</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/entrar">Entrar</a>

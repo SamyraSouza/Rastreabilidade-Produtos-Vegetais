@@ -2,15 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\BatchController;
+use App\Http\Controllers\ProductController;
 
 // Página Inicial
-Route::get('/', [BatchController::class, 'index']);
+Route::get('/', [ProductController::class, 'index']);
 
 
 //Cadastrar Lote
 
-Route::get('/lote/create', [BatchController::class, 'create']);
+Route::get('/lote', [ProductController::class, 'create']);
 
 
 // Rastrear Lote
