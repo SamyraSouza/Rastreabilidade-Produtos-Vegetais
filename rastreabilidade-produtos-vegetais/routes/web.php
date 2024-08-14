@@ -20,10 +20,6 @@ Route::get('/product/create', [ProductController::class, 'createproducts']);
 Route::post('/products', [ProductController::class, 'storeproduct']);
 
 
-
-
-
-
 // // Rastrear Lote
 // Route::get('/rastreamento', function () {
 //     return view('rastreio');

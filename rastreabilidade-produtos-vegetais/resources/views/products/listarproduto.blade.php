@@ -1,62 +1,86 @@
 @extends('layouts.main')
 
-@section('title', 'Produtos')
+@section('title', 'Listar Produtos')
+
+@section('page', 'Listar Produtos')
 
 @section('content')
 
 
 <!-- BARRA DE BUSCAS -->
 
-<div class="busca">
-    <form class="barra-pesquisa d-flex justify-content-center" action="/products" method="GET">
-        <input class="barra-pesquisa" type="text" name="search" placeholder="Procurar Produto">
-        <button type="submit">Buscar</button>
+    <div class="input-group mb-3 d-flex justify-content-center">
+    <form class="d-flex justify-content-center wid mt-4" action="/products" method="GET">
+        <input type="text" class="form-control" name="search" placeholder="Procurar por produto">
+        <button class="btn btn-outline-success mb-0" type="submit" id="button-addon2">Buscar</button>
     </form>
-</div>
-
-<!-- CONTAINERS LOTES -->
-
-<div class="lotes">
-
-<!-- Flash Message -->
-@if(session('msg'))
-<div class="container-fluid">
-    <div class="row flash alert alert-success d-flex">
-    <p class="msg">{{session('msg')}}</p>
     </div>
-</div>
-@endif
-<!-- End flash message -->
-
-@if($search)
-<h1 class="lotes-title"> Buscando por: {{$search}} </h1>
-@else
-<h1 class="lotes-title"> Produtos </h1>
-@endif
-
-<a href="/product/create"><button class="cadastro" >Cadastrar Produto</button></a>
-
-<div class="container">
-
-<div class="container">
 
 
-    @foreach($products as $product)
+<div class="container-fluid py-4 mt-7">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Tabela de Produtos</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Código</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
 
-    <div class="card">
-        <img src="/img/products/{{$product->image}}" alt="{{$product->name}}">
-        <p class="title">Nome: {{$product->name}}</p>
-        <p>Código : {{$product->code}}</p>
-        <p>Descrição: {{$product->description}}</p>
 
-        <div class="botao">
-        <a class="botao" href="/products/{{$product->id}}"><button>Ver Mais</button></a>
+                  <tbody>
+                  @foreach($products as $product)
+                  
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{$product->name}}</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">{{$product->code}}</p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+
+                      @if($product->status == "1")
+                        <span class="badge badge-sm bg-gradient-success">Ativo</span>
+                        @else
+                        <span class="badge badge-sm bg-gradient-danger">Inativo</span>
+                        @endif
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{$product->description}}</span>
+                      </td>
+                      <td class="align-middle">
+                      <a href="/products/{{$product->id}}"><button type="button" class="btn btn-info">Saiba Mais</button></a>
+                      @if($product->status == "1")
+                      <a href="#"><button type="button" class="btn btn-success">Solicitar Lote</button></a>
+                      @endif
+                      </td>
+                    </tr>
+                    @endforeach
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    @endforeach
-
-    
-</div>
 
 @endsection
