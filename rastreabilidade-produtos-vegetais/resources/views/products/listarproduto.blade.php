@@ -8,8 +8,10 @@
 <!-- BARRA DE BUSCAS -->
 
 <div class="busca">
-    <input class="barra-pesquisa" type="text" placeholder="Procurar Produto">
-    <button>Buscar</button>
+    <form class="barra-pesquisa d-flex justify-content-center" action="/products" method="GET">
+        <input class="barra-pesquisa" type="text" name="search" placeholder="Procurar Produto">
+        <button type="submit">Buscar</button>
+    </form>
 </div>
 
 <!-- CONTAINERS LOTES -->
@@ -26,14 +28,18 @@
 @endif
 <!-- End flash message -->
 
-
-<h1 class="lotes-title"> Produtos </h1> 
+@if($search)
+<h1 class="lotes-title"> Buscando por: {{$search}} </h1>
+@else
+<h1 class="lotes-title"> Produtos </h1>
+@endif
 
 <a href="/product/create"><button class="cadastro" >Cadastrar Produto</button></a>
 
 <div class="container">
 
 <div class="container">
+
 
     @foreach($products as $product)
 

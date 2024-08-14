@@ -23,6 +23,8 @@
 
                 <p class="product-name"><ion-icon class="icon" name="qr-code-outline"></ion-icon> <span class="sobre">Código:</span> {{$product->code}}</p>
 
+                <p class="product-name"><ion-icon class="icon" name="triangle-outline"></ion-icon> <span class="sobre">Quantidade:</span> {{$product->quantity}} {{$unit->title}}</p>
+
                 <p class="product-name"><ion-icon class="icon" name="flower-outline"></ion-icon> <span class="sobre">Variedade Cultivar: </span> 
             
                 @if($product->variedade_cultivar == "1")

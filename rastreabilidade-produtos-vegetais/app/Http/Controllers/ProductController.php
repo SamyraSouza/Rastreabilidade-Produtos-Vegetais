@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Product;
 
+use App\Models\Unit;
+
 class ProductController extends Controller
 {
 
@@ -16,14 +18,29 @@ class ProductController extends Controller
 
     public function showproducts(){
 
-        $products = Product::all();
+        $search = request('search');
 
-        return view('products.listarproduto', ['products' => $products]);
+        if($search){
+
+            $products = Product::where([
+                ['name', 'like', '%'.$search.'%']
+            ])->orWhere([
+                ['code', 'like', '%'.$search.'%']
+            ])->get();
+
+        }else{
+             $products = Product::all();
+        }       
+
+        return view('products.listarproduto', ['products' => $products, 'search' => $search]);
+
     }
 
     public function createproducts(){
 
-        return view('products.cadastrarproduto');
+        $units = Unit::all();
+
+        return view('products.cadastrarproduto', ['units' => $units]);
         
     }
 
@@ -34,6 +51,8 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->comertial_name = $request->comertial_name;
         $product->status = $request->status;
+        $product->units_id = $request->units_id;
+        $product->quantity = $request->quantity;
         $product->variedade_cultivar = $request->variedade_cultivar ;
         $product->description = $request->description;
 
@@ -72,7 +91,11 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
-        return view('products.show', ['product'=>$product]);
+        $unidade = $product->units_id;
+
+        $unit = Unit::findOrFail($unidade);
+
+        return view('products.show', ['product'=>$product, 'unit' => $unit]);
         
     }
 

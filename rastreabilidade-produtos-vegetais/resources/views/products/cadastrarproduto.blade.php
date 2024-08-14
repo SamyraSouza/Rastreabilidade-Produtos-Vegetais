@@ -56,14 +56,20 @@
         </div>
 
         <div class="form-group">
-            <label for="unit" class="mt3"></label>
 
-            <select name="unit" id="unit" class="form-control">
-            @foreach($units as $unit)
-                <option value="{{$unit->id}}">{{$unit->title}}</option>
-            @endforeach
-           </select>     
+            <label class="mr-2" for="quantity">Quantidade / Unidade de Medida</label>
 
+            <div class="form-group d-flex">
+
+                <input class="form-control" type="number" name="quantity" id="quantity">
+
+                <select name="units_id" id="units_id" class="form-control">
+                     @foreach($units as $unit)
+                        <option value="{{$unit->id}}">{{$unit->title}} - {{$unit->description}}</option>
+                     @endforeach
+                </select>    
+
+            </div>
         </div>
 
         <input type="submit" class="btn btn-success mt-5 mb-5" value="Criar Produto">
