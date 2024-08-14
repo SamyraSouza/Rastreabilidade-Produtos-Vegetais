@@ -28,14 +28,18 @@
 }
 
 .lotes{
-    padding-top: 100px;
-    background-color: rgba(150, 204, 167, 0.075);
     padding-bottom: 100px;
+}
+
+.flash{
+    padding-bottom: 0;
+    display: flex;
+    align-items: center;
 }
 
 .container{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     width: 100%;
     padding: 0;
@@ -44,18 +48,21 @@
 .card{
     margin-top: 30px;
     cursor: pointer;
-    width: 22%;
+    width: 23%;
     margin: 1%;
     border-radius: 10px;
     border: 0;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(15, 48, 16, 0.144);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.096);
+}
+
+a:hover{
+    text-decoration: none;
 }
 
 .card:hover{
     scale: 1.1;
     transition: 0.5s;
-    color: rgba(46, 105, 66, 0.733);
 }
 
 .busca{
@@ -113,6 +120,11 @@ hr{
 .card p{
     margin-left: 10px;
     margin-bottom: 10px;
+}
+
+.card img{
+    height: 200px;
+    margin-bottom: 20px;
 }
 
 .botao{
@@ -228,6 +240,53 @@ hr{
     justify-content: center;
     height: 500px;
     margin-bottom: 100px;
+}
+
+/* Product page */
+
+#image-container{
+    display: flex;
+    justify-content: center;
+}
+.product-description{
+    font-size: 20px;
+}
+
+.marg{
+    margin-top: 50px;
+}
+
+.product-name{
+    font-size: 20px;
+}
+.icon{
+    color: rgb(51, 109, 70);
+}
+.sobre{
+    font-weight: 700;
+    color: rgb(49, 131, 75);
+}
+.ativo{
+    color: rgb(37, 180, 37);
+    font-weight: 700;
+}
+.inativo{
+    font-weight: 700;
+    color: red;
+}
+
+#info-container{
+    margin-top: 100px;
+    width: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#info-container img{
+    width: 100%;
+}
+.img-fluid{
+    border-radius: 10px;
 }
 
 @media (min-width: 1200px) {

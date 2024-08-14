@@ -8,7 +8,7 @@
 <!-- BARRA DE BUSCAS -->
 
 <div class="busca">
-    <input class="barra-pesquisa" type="text" placeholder="Procurar Lote">
+    <input class="barra-pesquisa" type="text" placeholder="Procurar Produto">
     <button>Buscar</button>
 </div>
 

@@ -27,12 +27,34 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/rastreamento">Rastrear Lote</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/lote">Cadastrar Lote</a>
-            </li>
+            
+            <!-- Lotes -->
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Lotes
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button"><a class="nav-link" href="/lote">Listar Lote</a></button>
+                <button class="dropdown-item" type="button"><a class="nav-link" href="/lote/create">Cadastrar Lote</a></button>
+                <button class="dropdown-item" type="button"><a class="nav-link" href="/batchs">Meus Lotes</a></button>
+                <button class="dropdown-item" type="button"><a class="nav-link" href="/rastreamento">Rastrear Lote</a></button>
+                </div>
+            </div>
+            <!--  -->
+            
+            <!-- Produtos -->
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Produtos
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button"><a class="nav-link" href="/products">Listar Produtos</a></button>
+                <button class="dropdown-item" type="button"><a class="nav-link" href="/product/create">Cadastrar Produto</a></button>
+                <button class="dropdown-item" type="button"><a class="nav-link" href="#">Meus Produtos</a></button>
+                </div>
+            </div>
+            <!--  -->
+
             <li class="nav-item">
                 <a class="nav-link" href="/entrar">Entrar</a>
             </li>

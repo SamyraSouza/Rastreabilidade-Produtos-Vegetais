@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('comertial_name');
             $table->text('description');
             $table->boolean('status');
+            $table->boolean('variedade_cultivar');
             $table->timestamps();
         });
     }
