@@ -40,7 +40,7 @@
 
                   <tbody>
                   @foreach($products as $product)
-                  
+                   @if($product->status == "1")
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -56,22 +56,53 @@
                       </td>
                       <td class="align-middle text-center text-sm">
 
-                      @if($product->status == "1")
+                     
                         <span class="badge badge-sm bg-gradient-success">Ativo</span>
-                        @else
-                        <span class="badge badge-sm bg-gradient-danger">Inativo</span>
-                        @endif
+                     
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{$product->description}}</span>
                       </td>
                       <td class="align-middle">
                       <a href="/products/{{$product->id}}"><button type="button" class="btn btn-info">Saiba Mais</button></a>
-                      @if($product->status == "1")
+                    
                       <a href="#"><button type="button" class="btn btn-success">Solicitar Lote</button></a>
-                      @endif
+                     
                       </td>
-                    </tr>
+                    </tr> 
+                    @endif
+                    @endforeach
+
+                    @foreach($products as $product)
+                   @if($product->status != "1")
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{$product->name}}</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">{{$product->code}}</p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+
+                     
+                        <span class="badge badge-sm bg-gradient-danger">Inativo</span>
+                     
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{$product->description}}</span>
+                      </td>
+                      <td class="align-middle">
+                      <a href="/products/{{$product->id}}"><button type="button" class="btn btn-info">Saiba Mais</button></a>
+                     
+                      </td>
+                    </tr> 
+                    @endif
                     @endforeach
                     
                   </tbody>

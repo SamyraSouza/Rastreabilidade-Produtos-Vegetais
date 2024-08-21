@@ -28,7 +28,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="name" class="form-control-label">Nome</label>
-                    <input class="form-control" type="text" name="name" id="name" placeholder="Nome">
+                    <input required class="form-control" type="text" name="name" id="name" placeholder="Nome">
                   </div>
                 </div>
 
