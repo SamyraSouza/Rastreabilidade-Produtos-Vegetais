@@ -4,7 +4,21 @@
     justify-content: center;
     height: 500px;
 }
-
+.imagem-table{
+    width: 40px;
+}
+#img-container{
+    height: 100%;
+}
+.table{
+    color:pink;
+}
+.navegador{
+    margin-top: -150px;
+}
+#img-container img{
+    width: 80%;
+}
 .bem_vindo{
     display: flex;
     justify-content: center;
@@ -31,4 +45,46 @@
 .row{
     display: flex;
     justify-content: center;
+}
+
+.sobre, .icon{
+    color: green;
+}
+
+.light{
+    color: white;
+}
+
+.marg{
+    margin-left: 20px;
+}
+
+.ativo{
+    color: green;
+    font-weight: 700;
+}
+
+.inativo{
+    color: red;
+    font-weight: 700;
+}
+
+.forte, .forte:hover{
+    text-decoration: none;
+    font-weight: 700;
+    color: white;
+}
+
+.img-preview{
+    margin-left: 10px;
+    width: 100px;
+}
+
+.tudo{
+    display: flex;
+    width: 100%;
+}
+
+.saber{
+    margin-top: -20;
 }

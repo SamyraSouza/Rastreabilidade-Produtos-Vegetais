@@ -6,7 +6,6 @@
 
 @section('content')
 
-
 <!-- BARRA DE BUSCAS -->
 
     <div class="input-group mb-3 d-flex justify-content-center">
@@ -18,6 +17,34 @@
 
 
 <div class="container-fluid py-4 mt-7">
+@if(session('msg'))
+<div class="alert alert-success" role="alert">
+   <span class="light">{{session('msg')}}</span> 
+</div>
+  @endif
+
+
+
+  @if(count($products)==0 && $search)
+
+  <div class="alert alert-danger" role="alert"><div class="light">
+  Não foi possível encontrar nenhum produto no nome ou código de: {{$search}}. Veja os produtos diponíveis <a class="forte" href="/products">Aqui</a></div>
+</div>
+
+  @elseif(count($products)==0)
+
+<div class="alert alert-danger" role="alert">
+  <div class="light">Não há produtos disponíveis.</div>
+</div>
+ 
+@else
+
+@if(count($products)!=0 && $search)
+<div class="alert alert-light" role="alert">
+   <span>Buscando por: {{$search}}</span> 
+</div>
+@endif
+
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
@@ -64,16 +91,20 @@
                         <span class="text-secondary text-xs font-weight-bold">{{$product->description}}</span>
                       </td>
                       <td class="align-middle">
-                      <a href="/products/{{$product->id}}"><button type="button" class="btn btn-info">Saiba Mais</button></a>
-                    
-                      <a href="#"><button type="button" class="btn btn-success">Solicitar Lote</button></a>
+                      <a class="marg" href="/products/{{$product->id}}"><button type="button" class="btn btn-light"><i class="fa fa-eye"></i></button></a>
+
+                      <a class="marg" href="/products/edit/{{$product->id}}"><button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button></a>
+                      
+                      <button type="button" onclick="inativar({{$product->id}})" class="btn btn btn-danger marg">Inativar</button>                                      
                      
+                      <a class="marg" href="/batch/create/{{$product->id}}"><button type="button" class="btn btn-success">Cadastrar Lote</button></a>
+                      
                       </td>
                     </tr> 
                     @endif
                     @endforeach
 
-                    @foreach($products as $product)
+                  @foreach($products as $product)
                    @if($product->status != "1")
                     <tr>
                       <td>
@@ -94,11 +125,15 @@
                         <span class="badge badge-sm bg-gradient-danger">Inativo</span>
                      
                       </td>
+                      
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{$product->description}}</span>
                       </td>
+
                       <td class="align-middle">
-                      <a href="/products/{{$product->id}}"><button type="button" class="btn btn-info">Saiba Mais</button></a>
+                      <a href="/products/{{$product->id}}"><button type="button" class="btn btn-outline-info">Saiba Mais</button></a>
+
+                      <a href="/products/ativar/{{$product->id}}"><button type="button" class="btn btn btn-outline-success">Ativar Produto</button></a>
                      
                       </td>
                     </tr> 
@@ -113,5 +148,5 @@
         </div>
       </div>
 
-
+@endif
 @endsection

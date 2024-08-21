@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BatchController;
 
 // Mostrar Página Inicial
 Route::get('/', [ProductController::class, 'index']);
@@ -19,29 +20,47 @@ Route::get('/product/create', [ProductController::class, 'createproducts']);
 
 Route::post('/products', [ProductController::class, 'storeproduct']);
 
+// Editar Produto
+Route::get('/products/edit/{id}', [ProductController::class, 'edit']);
 
-// // Rastrear Lote
-// Route::get('/rastreamento', function () {
-//     return view('rastreio');
-// });
+Route::put('/products/update/{id}', [ProductController::class, 'update']);
 
-// Route::get('/rastreamento', function () {
+//Inativar Produto
+Route::get('/products/inativar/{id}', [ProductController::class, 'inativar']);
+Route::get('/products/inativarsobre/{id}', [ProductController::class, 'inativarsobre']);
 
-//     $busca  = request('search');
+//ativar Produto
+Route::get('/products/ativar/{id}', [ProductController::class, 'ativar']);
+Route::get('/products/ativarsobre/{id}', [ProductController::class, 'ativarsobre']);
 
-//     return view('rastreio', ['busca' => $busca]);
-// });
+Route::get('/batchs/{id}', [BatchController::class, 'showbatchs']);
 
-// Route::get('/rastreamento/{id}', function ($id) {
-//     return view('lote', ['id' => $id]);
-// });
+// Gerar pdf produto
+Route::get('/products/pdf/{id}', [ProductController::class, 'pdf']);
 
-// // Entrar
-// Route::get('/entrar', function () {
-//     return view('entrar');
-// });
+//botao inativar
+Route::get('/products/botao/{id}', [ProductController::class, 'botao']);
 
-// //Cadastrar Usuário
-// Route::get('/cadastrar', function () {
-//     return view('cadastrar');
-// });
+//Cadastrar Lote
+Route::get('/batch/create/', [BatchController::class, 'createbatchs']);
+Route::get('/batch/create/{id}', [BatchController::class, 'createbatchsid']);
+
+Route::post('/batchs', [BatchController::class, 'storebatch']);
+
+//editar Lote
+Route::get('/batch/edit/{id}',[BatchController::class, 'edit']);
+
+Route::put('/batchs/update/{id}', [BatchController::class, 'update']);
+
+//Mostar Lote
+Route::get('/batchs', [BatchController::class, 'showbatchs']);
+
+Route::get('/batch/{id}', [BatchController::class, 'showbatch']);
+
+//Inativar Lote
+Route::get('/batchs/inativar/{id}', [BatchController::class, 'inativar']);
+Route::get('/batchs/inativarsobre/{id}', [BatchController::class, 'inativarsobre']);
+
+//ativar Lote
+Route::get('/batchs/ativar/{id}', [BatchController::class, 'ativar']);
+Route::get('/batchs/ativarsobre/{id}', [BatchController::class, 'ativarsobre']);

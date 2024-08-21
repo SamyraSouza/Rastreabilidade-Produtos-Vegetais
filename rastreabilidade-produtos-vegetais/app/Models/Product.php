@@ -10,5 +10,10 @@ class Product extends Model
     public function units(){
         return $this->hasOne('App\Models\Unit');
     }
+
+    public function batch(){
+        return $this->belongsTo('App\Models\Batch');
+    }
    
+    protected $guarded = [];
 }

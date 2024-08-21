@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/img/logistica-verde.png">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <title>
     TSN Logística - @yield('title')
   </title>
@@ -18,8 +21,13 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="/css/nucleo-svg.css" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css">
+
+  
   <!-- CSS Files -->
   <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 
@@ -46,7 +54,8 @@
             </div>
             <span class="nav-link-text ms-1">Página Inicial</span>
           </a>
-        </li>
+        </li>       
+
 
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Produtos</h6>
@@ -57,7 +66,7 @@
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-collection text-success text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Listar Produtos</span>
+            <span class="nav-link-text ms-1">Listar Produto</span>
           </a>
         </li>
         
@@ -69,13 +78,27 @@
             <span class="nav-link-text ms-1">Cadastrar Produto</span>
           </a>
         </li>
+        
+
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Lotes</h6>
+        </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="#">
+          <a class="nav-link " href="/batchs">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-satisfied text-success text-sm opacity-10"></i>
+              <i class="ni ni-collection text-success text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Meus Produtos</span>
+            <span class="nav-link-text ms-1">Listar Lote</span>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link " href="/batch/create">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Cadastrar Lote</span>
           </a>
         </li>
 
@@ -98,7 +121,7 @@
           <h6 class="font-weight-bolder text-white mb-0">@yield('page')</h6>
         </nav>
 
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+        <!-- <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
             <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
@@ -113,7 +136,7 @@
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Cadastrar</span>
               </a>
-            </li>
+            </li> -->
             
           </ul>
         </div>
@@ -131,14 +154,21 @@
 <!-- Core -->
 <script src="/js/core/popper.min.js"></script>
 <script src="/js/core/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js" integrity="sha512-MpDFIChbcXl2QgipQrt1VcPHMldRILetapBl5MPCA9Y8r7qvlwx1/Mc9hNTzY+kS5kX6PdoDq41ws1HiVNLdZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="jquery-3.7.1.min.js"></script>
+@include('sweetalert::alert')
 <!-- Theme JS -->
 <script src="/js/argon-dashboard.min.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 
 <script src="/js/script.js"></script>
 

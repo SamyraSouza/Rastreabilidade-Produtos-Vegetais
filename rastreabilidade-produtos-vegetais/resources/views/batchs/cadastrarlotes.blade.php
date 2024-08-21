@@ -36,16 +36,13 @@
                      <label for="products_id">Selecione o Produto:</label>
                   <div class="form-group">
             <select name="products_id" id="products_id"  class="js-example-basic-single">
+            <option value="">Selecione</option>     
 
-            @if($productchoose->id != "")
-                <option value="{{$productchoose->id}}">{{$productchoose->name}} ({{$productchoose->code}})</option>
-               
-            @else
             @foreach($products as $product)
              
                   <option value="{{$product->id}}">{{$product->name}} ({{$product->code}})</option>          
             @endforeach
-            @endif
+         
             </select>
   </div>
             </div>

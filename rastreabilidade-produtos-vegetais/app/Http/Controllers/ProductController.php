@@ -8,6 +8,12 @@ use App\Models\Product;
 
 use App\Models\Unit;
 
+use App\Models\Batch;
+
+use RealRashid\SweetAlert\Facades\Alert;
+
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class ProductController extends Controller
 {
 
@@ -15,8 +21,11 @@ class ProductController extends Controller
         return view('index');
     }
 
-
     public function showproducts(){
+   
+        $produto = Product::select('*')->whereIn('id', function($query) {
+            $query->select('products_id')->from('batches');
+        })->get();
 
         $search = request('search');
 
@@ -32,9 +41,12 @@ class ProductController extends Controller
              $products = Product::all();
         }       
 
-        return view('products.listarproduto', ['products' => $products, 'search' => $search]);
+        $batchs = Batch::all();
+
+        return view('products.listarproduto', ['products' => $products, 'search' => $search,'batchs' => $batchs,'produto' => $produto]);
 
     }
+
 
     public function createproducts(){
 
@@ -83,11 +95,17 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect('/products')->with('msg', 'Produto criado com sucesso!');
+        toast('Produto criado com sucesso!','success');
+
+        return redirect('/products');
 
     }
 
     public function showproduct($id){
+
+       $batch = Batch::where([
+            ['products_id', 'like', $id]
+        ])->first(); 
 
         $product = Product::findOrFail($id);
 
@@ -95,8 +113,121 @@ class ProductController extends Controller
 
         $unit = Unit::findOrFail($unidade);
 
-        return view('products.show', ['product'=>$product, 'unit' => $unit]);
+        return view('products.show', ['product'=>$product, 'unit' => $unit, 'batchs' => $batch]);
         
     }
 
+    public function edit($id){
+
+        $product = Product::findOrFail($id);
+
+        $units = Unit::all();
+
+        $unidade = $product->units_id;
+
+        $unit = Unit::findOrFail($unidade);
+
+        return view('products.edit', ['product'=>$product, 'units' => $units, 'unit'=>$unit]);
+    }
+
+    public function update(Request $request){
+
+        Product::findOrFail($request->id)->update($request->all());
+
+        toast('Produto editado com sucesso!','success');
+
+        return redirect('/products');
+    }
+
+    public function inativar($id){
+ 
+        $batch = Batch::where([
+            ['products_id', 'like', $id]
+        ])->first(); 
+        
+        if($batch != ""){
+            
+            $batch->status = 0;
+            
+            $batch->update();
+        }
+
+        $product = Product::findOrFail($id);
+
+        $product->status = 0;
+
+        $product->update();
+
+        toast('Produto inativado com sucesso!','success');
+
+        return redirect('/products');
+
+    }
+
+    public function inativarsobre($id){
+        
+        $batch = Batch::where([
+            ['products_id', 'like', $id]
+        ])->first(); 
+        
+        if($batch != ""){
+            $batch->status = 0;
+            
+            $batch->update();
+        }
+
+        $product = Product::findOrFail($id);
+
+        $product->status = 0;
+
+        $product->update();
+
+        toast('Produto inativado com sucesso!','success');
+
+        return redirect('/products/'.$id);
+    }
+
+    public function ativar($id){
+
+        $product = Product::findOrFail($id);
+
+        $product->status = 1;
+
+        $product->update();
+
+        toast('Produto ativado com sucesso!','success');
+
+        return redirect('/products');
+    }
+
+    public function ativarsobre($id){
+
+        $product = Product::findOrFail($id);
+
+        $product->status = 1;
+
+        $product->update();
+
+        toast('Produto ativado com sucesso!','success');
+
+        return redirect('/products/'.$id);
+    }
+
+    public function pdf($id){
+
+        $product = Product::findOrFail($id);
+
+        $data =[
+            [
+                'name' => $product->name,
+                'comertial_name' => $product->comertial_name,
+                'code' => $product->code,
+                'description' => $product->description
+            ]
+        ];
+
+        $pdf = Pdf::loadView('pdf',['data' => $data]);
+
+        return $pdf->stream();
+    }
 }
