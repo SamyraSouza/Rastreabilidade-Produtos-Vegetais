@@ -2,7 +2,7 @@
 
 @section('title', 'Listar Lotes')
 
-@section('page', 'Listar Lotes')
+@section('page', 'Lotes')
 
 @section('content')
 
@@ -22,8 +22,7 @@
 <div class="alert alert-success" role="alert">
    <span class="light">{{session('msg')}}</span> 
 </div>
-  @endif
-
+ @endif
 
 
   @if(count($batchs)==0 && $search)
@@ -62,6 +61,7 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Código Lote</th>
                       <th class="text-secondary opacity-7"></th>
+                      <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
 
@@ -81,7 +81,8 @@
                             @if($product->id == $batch->products_id)
                             {{$product->name}}
                             @endif
-                            @endforeach</h6>
+                            @endforeach
+                          </h6>
                           </div>
                         </div>
                       </td>
@@ -103,13 +104,11 @@
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{$batch->code}}</span>
                       </td>
-                      <td class="align-middle">
-                      <a class="marg" href="/batch/{{$batch->id}}"><button type="button" class="btn btn-light"><i class="fa fa-eye"></i></button></a>
-
-                      <a class="marg" href="/batch/edit/{{$batch->id}}"><button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button></a>
-
-                      <a class="marg" href="/batchs/inativar/{{$batch->id}}"><button type="button" class="btn btn-danger">Inativar</button></a>                   
-                     
+                      <td class="align-middle">                                   
+                      <a class="marg" href="/movement/create/{{$batch->id}}"><button type="button" class="btn btn-success">Cadastrar Movimentação</button><a> 
+                      </td>
+                      <td class="align-middle">  
+                      <a class="marg" href="/batch/{{$batch->id}}"><i class="fa fa-eye"></i></a>
                       </td>
                     </tr> 
                     @endif
@@ -152,15 +151,16 @@
                         <span class="text-secondary text-xs font-weight-bold">{{$batch->code}}</span>
                       </td>
                       <td class="align-middle">
-                      <a href="/batch/{{$batch->id}}"><button type="button" class="btn btn-outline-info">Saiba Mais</button></a>
-
                       @foreach($products as $product)
                       @if($product->id == $batch->products_id && $product->status == "0")
                       <button type="button" onclick="ativar({{$batch->id}})" class="btn btn btn-outline-success marg">Ativar Lote</button>    
                       @elseif($product->id == $batch->products_id && $product->status == "1")
                      <a href="/batchs/ativar/{{$batch->id}}"><button type="button" class="btn btn btn-outline-success marg">Ativar Lote</button></a>  
-                      @endif                                          
+                      @endif                                                             
                       @endforeach    
+                      </td>
+                      <td class="align-middle">
+                      <a class="marg" href="/batch/{{$batch->id}}"><i class="fa fa-eye"></i></a>
                       </td>
                     </tr> 
                     @endif
@@ -170,8 +170,8 @@
                   </tbody>
                 </table>
               </div>
-            </div>
-          </div>
+            </div> 
+          </div>{{ $batchs->links() }}
         </div>
       </div>
 

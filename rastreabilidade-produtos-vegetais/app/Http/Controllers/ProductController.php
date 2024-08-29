@@ -8,6 +8,8 @@ use App\Models\Product;
 
 use App\Models\Unit;
 
+use App\Models\Person;
+
 use App\Models\Batch;
 
 use RealRashid\SweetAlert\Facades\Alert;
@@ -18,11 +20,14 @@ class ProductController extends Controller
 {
 
     public function index(){
-        return view('index');
+
+        $people = Person::WhereNull('permission')->get();
+
+        return view('index',  ['people' => $people]);
     }
 
     public function showproducts(){
-   
+
         $produto = Product::select('*')->whereIn('id', function($query) {
             $query->select('products_id')->from('batches');
         })->get();
@@ -35,10 +40,10 @@ class ProductController extends Controller
                 ['name', 'like', '%'.$search.'%']
             ])->orWhere([
                 ['code', 'like', '%'.$search.'%']
-            ])->get();
+            ])->paginate(5);
 
         }else{
-             $products = Product::all();
+             $products = Product::select('*')->from('products')->paginate(5);
         }       
 
         $batchs = Batch::all();
@@ -105,7 +110,7 @@ class ProductController extends Controller
 
        $batch = Batch::where([
             ['products_id', 'like', $id]
-        ])->first(); 
+        ])->first();
 
         $product = Product::findOrFail($id);
 
@@ -136,7 +141,7 @@ class ProductController extends Controller
 
         toast('Produto editado com sucesso!','success');
 
-        return redirect('/products');
+        return redirect('/products/'.$request->id);
     }
 
     public function inativar($id){
@@ -222,11 +227,12 @@ class ProductController extends Controller
                 'name' => $product->name,
                 'comertial_name' => $product->comertial_name,
                 'code' => $product->code,
-                'description' => $product->description
+                'description' => $product->description,
+                'status' => $product->status
             ]
         ];
 
-        $pdf = Pdf::loadView('pdf',['data' => $data]);
+        $pdf = Pdf::loadView('products.pdf',['data' => $data]);
 
         return $pdf->stream();
     }

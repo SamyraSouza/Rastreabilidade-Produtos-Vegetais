@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
-@section('title', 'Listar Produtos')
+@section('title', 'Produtos')
 
-@section('page', 'Listar Produtos')
+@section('page', 'Produtos')
 
 @section('content')
 
@@ -61,6 +61,7 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
                       <th class="text-secondary opacity-7"></th>
+                      <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
 
@@ -90,15 +91,12 @@
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{$product->description}}</span>
                       </td>
-                      <td class="align-middle">
-                      <a class="marg" href="/products/{{$product->id}}"><button type="button" class="btn btn-light"><i class="fa fa-eye"></i></button></a>
-
-                      <a class="marg" href="/products/edit/{{$product->id}}"><button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button></a>
-                      
-                      <button type="button" onclick="inativar({{$product->id}})" class="btn btn btn-danger marg">Inativar</button>                                      
-                     
-                      <a class="marg" href="/batch/create/{{$product->id}}"><button type="button" class="btn btn-success">Cadastrar Lote</button></a>
-                      
+                      <td class="align-middle">                                                    
+                        <a class="marg" href="/batch/create/{{$product->id}}"><button type="button" class="btn btn-success">Cadastrar Lote</button></a>
+                               
+                      </td>
+                      <td class="align-middle"> 
+                         <a class="marg" href="/products/{{$product->id}}"><i class="fa fa-eye"></i></a>
                       </td>
                     </tr> 
                     @endif
@@ -130,21 +128,21 @@
                         <span class="text-secondary text-xs font-weight-bold">{{$product->description}}</span>
                       </td>
 
-                      <td class="align-middle">
-                      <a href="/products/{{$product->id}}"><button type="button" class="btn btn-outline-info">Saiba Mais</button></a>
-
-                      <a href="/products/ativar/{{$product->id}}"><button type="button" class="btn btn btn-outline-success">Ativar Produto</button></a>
-                     
+                      <td class="align-middle">               
+                      <a href="/products/ativar/{{$product->id}}"><button type="button" class="btn btn btn-outline-success marg">Ativar Produto</button></a>           
+                      </td>       
+                      <td class="align-middle"> 
+                      <a clas="marg" href="/products/{{$product->id}}"><i class="fa fa-eye"></i></a>
                       </td>
                     </tr> 
                     @endif
                     @endforeach
-                    
+                
                   </tbody>
                 </table>
               </div>
             </div>
-          </div>
+          </div>    {{ $products->links() }}
         </div>
       </div>
 

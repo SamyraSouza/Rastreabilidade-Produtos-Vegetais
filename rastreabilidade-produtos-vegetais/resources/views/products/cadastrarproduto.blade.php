@@ -2,7 +2,7 @@
 
 @section('title', 'Cadastrar Produto')
 
-@section('page', 'Cadastrar Produto')
+@section('page', 'Produtos')
 
 @section('content')
 
@@ -96,8 +96,8 @@
               <div class="form-group">
                 <label for="image" class="form-control-label">Imagem do Produto</label>
                 <input type="file" name="image" id="image" class="form-control-file">
+              </div>
             </div>
-        </div>
             </div>
 
             <div class="d-flex justify-content-center">

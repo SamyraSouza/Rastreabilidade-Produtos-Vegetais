@@ -33,15 +33,15 @@
             <div id="info-container" class="col-md-6">
                 <h1 class="lotes-title">{{$product->name}}</h1>
 
-                <p class="product-name"><ion-icon class="icon" name="leaf-outline"></ion-icon> <span class="sobre">Nome Comercial:</span> {{$product->comertial_name}}</p>
+                <p class="product-name"> <span class="sobre">Nome Comercial:</span> {{$product->comertial_name}}</p>
 
                 <p class="product-name"><ion-icon class="icon" name="qr-code-outline"></ion-icon> <span class="sobre">Código:</span> {{$product->code}}</p>
 
-                <p class="product-name"><ion-icon class="icon" name="calendar"></ion-icon> <span class="sobre">Data de Criação:</span> {{date('d/m/Y', strtotime($product->created_at))}}</p>
+                <p class="product-name"><span class="sobre">Data de Criação:</span> {{date('d/m/Y', strtotime($product->created_at))}}</p>
 
-                <p class="product-name"><ion-icon class="icon" name="triangle-outline"></ion-icon> <span class="sobre">Quantidade:</span> {{$product->quantity}} {{$unit->title}}</p>
+                <p class="product-name"> <span class="sobre">Quantidade:</span> {{$product->quantity}} {{$unit->title}}</p>
 
-                <p class="product-name"><ion-icon class="icon" name="flower-outline"></ion-icon> <span class="sobre">Variedade Cultivar: </span> 
+                <p class="product-name"><span class="sobre">Variedade Cultivar: </span> 
             
                 @if($product->variedade_cultivar == "1")
                     Sim
@@ -50,7 +50,7 @@
                 @endif
                 </p>
 
-                <p class="product-name"><ion-icon name="arrow-forward-outline"></ion-icon> <span class="sobre">Status: </span> 
+                <p class="product-name"><span class="sobre">Status: </span> 
             
                 @if($product->status == "1")
                     <span class="ativo">Ativo</span>
@@ -66,18 +66,14 @@
 
                       <a class="marg" href="/products/edit/{{$product->id}}"><button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button></a>
 
-                               
-                      @if($batchs->products_id == $product->id)
+                      @if($batchs != "" && $batchs->products_id && $batchs->products_id == $product->id)
                       <button type="button" onclick="inativarsobre({{$product->id}})" id="inativar" class="btn btn-danger marg">Inativar</button>
                       @else
-                      <a href="/products/inativar/{{$product->id}}"><button type="button" id="inativar" class="btn btn-danger marg">Inativar</button></a>
+                      <a href="/products/inativarsobre/{{$product->id}}"><button type="button" id="inativar" class="btn btn-danger marg">Inativar</button></a>
                       @endif
-                      
-                      @if($batchs->products_id != $product->id)
+                                 
                       <a  class="marg" href="/batch/create/{{$product->id}}"><button type="button" class="btn btn-success">Cadastrar Lote</button></a>
-                      @endif
-                   
-
+              
                     @else    
                     <a class="marg" href="/products/ativarsobre/{{$product->id}}"><button type="button" class="btn btn-success">Ativar</button></a>
                     @endif

@@ -2,7 +2,7 @@
 
 @section('title', $product->name)
 
-@section('page', 'Ver Produto - '.$product->name)
+@section('page', 'Ver Lote - '.$product->name)
 
 @section('content')
 
@@ -33,15 +33,15 @@
             <div id="info-container" class="col-md-6">
                 <h1 class="lotes-title mb-5">{{$batch->code}}</h1>
 
-                <p class="product-name"><ion-icon class="icon" name="flower"></ion-icon> <span class="sobre">  Produto:</span> {{$product->name}}</p>
+                <p class="product-name"><span class="sobre">  Produto:</span> {{$product->name}}</p>
 
-                <p class="product-name"><ion-icon class="icon" name="qr-code-outline"></ion-icon> <span class="sobre">  Código do produto:</span> {{$product->code}}</p>
+                <p class="product-name"><ion-icon class="icon" name="qr-code-outline"></ion-icon><span class="sobre">  Código do produto:</span> {{$product->code}}</p>
 
-                <p class="product-name"><ion-icon class="icon" name="calendar"></ion-icon> <span class="sobre">  Data de Produção:</span> {{date('d/m/Y', strtotime($batch->dt_producao))}}</p>
+                <p class="product-name"> <span class="sobre">  Data de Produção:</span> {{date('d/m/Y', strtotime($batch->dt_producao))}}</p>
 
-                <p class="product-name"><ion-icon class="icon" name="calendar"></ion-icon> <span class="sobre">  Data de Validade:</span> {{date('d/m/Y', strtotime($batch->dt_validade))}}</p>
+                <p class="product-name"> <span class="sobre">  Data de Validade:</span> {{date('d/m/Y', strtotime($batch->dt_validade))}}</p>
 
-                <p class="product-name"><ion-icon class="icon" name="flower-outline"></ion-icon> <span class="sobre">  Produção Ecológica: </span> 
+                <p class="product-name"> <span class="sobre">Produção Ecológica: </span> 
             
                 @if($batch->producao_ecologica == "1")
                     Sim
@@ -50,7 +50,7 @@
                 @endif
                 </p>
 
-                <p class="product-name"><ion-icon class="icon" name="flower-outline"></ion-icon> <span class="sobre">  Produção Sustentável: </span> 
+                <p class="product-name"><span class="sobre"> Produção Sustentável: </span> 
             
                 @if($batch->producao_sustentavel == "1")
                     Sim
@@ -59,16 +59,16 @@
                 @endif
                 </p>
 
-                <p class="product-name"><ion-icon name="arrow-forward-outline"></ion-icon> <span class="sobre">  Status: </span> 
+                <p class="product-name"><span class="sobre"> Status: </span> 
             
-                @if($product->status == "1")
+                @if($batch->status == "1")
                     <span class="ativo">Ativo</span>
                 @else
                 <span class="inativo">Inativo</span>
                 @endif
                 </p>
 
-                <p class="product-name"><ion-icon class="icon" name="calendar"></ion-icon> <span class="sobre">  Data de Criação:</span> {{date('d/m/Y', strtotime($batch->created_at))}}</p>
+                <p class="product-name"> <span class="sobre">  Data de Criação:</span> {{date('d/m/Y', strtotime($batch->created_at))}}</p>
 
                 <div class="mt-5">
                 <td class="align-middle">
@@ -79,7 +79,7 @@
 
                       <a class="marg" href="/batchs/inativarsobre/{{$batch->id}}"><button type="button" class="btn btn-danger">Inativar</button></a>
 
-                      <a  class="marg" href="#"><button type="button" class="btn btn-success">Cadastrar Movimentação</button></a>
+                      <a class="marg" href="/movement/create/{{$batch->id}}"><button type="button" class="btn btn-success">Cadastrar Movimentação</button><a> 
                  
                     @else    
                     
@@ -87,7 +87,7 @@
                       @if($product->id == $batch->products_id && $product->status == "0")
                       <button type="button" onclick="ativarsobre({{$batch->id}})" class="btn btn btn-outline-success marg">Ativar Lote</button>    
                       @elseif($product->id == $batch->products_id && $product->status == "1")
-                     <a href="/batchs/ativar/{{$batch->id}}"><button type="button" class="btn btn btn-outline-success marg">Ativar Lote</button></a>  
+                     <a href="/batchs/ativarsobre/{{$batch->id}}"><button type="button" class="btn btn btn-outline-success marg">Ativar Lote</button></a>  
                       @endif                                          
                       @endforeach
 

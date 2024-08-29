@@ -10,7 +10,11 @@ class Batch extends Model
     public function products(){
         return $this->hasOne('App\Models\Product');
     }
+    public function movement(){
+        return $this->belongsTo('App\Models\Movement');
+    }
 
     protected $guarded = [];
+    
     
 }

@@ -96,3 +96,20 @@ function ativarsobre(id){
         }
       });
 }
+
+function deletarmovimentacao(id){
+  Swal.fire({
+      title: "Tem certeza?",
+      text: "Você está deletando a movimentação!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Deletar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+          window.location.href = "/movement/delete/"+id;
+      }
+    });
+}
+

@@ -8,8 +8,12 @@ use App\Models\Batch;
 
 use App\Models\Product;
 
+use RealRashid\SweetAlert\Facades\Alert;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 class BatchController extends Controller
 {
+
 
 
     public function createbatchsid($id){
@@ -18,9 +22,7 @@ class BatchController extends Controller
 
         $productchoose = Product::findOrFail($id);
 
-        $products = Product::select('*')->whereNotIn('id', function($query) {
-            $query->select('products_id')->from('batches');
-        })->get();
+        $products = Product::all();
 
         return view('batchs.cadastrarlote', ['products' => $products, 'batchs' => $batchs, 'productchoose' => $productchoose]);
         
@@ -31,9 +33,7 @@ class BatchController extends Controller
         $batchs = Batch::all();
 
 
-        $products = Product::select('*')->whereNotIn('id', function($query) {
-            $query->select('products_id')->from('batches');
-        })->get();
+        $products = Product::all();
 
         return view('batchs.cadastrarlotes', ['products' => $products, 'batchs' => $batchs]);
         
@@ -76,10 +76,10 @@ public function showbatchs(){
 
         $batchs = Batch::where([
             ['code', 'like', '%'.$search.'%']
-        ])->get();
+        ])->paginate(5);
 
     }else{
-        $batchs = Batch::all();
+        $batchs = Batch::select('*')->from('batches')->paginate(5);
     }       
 
     $products = Product::all();
@@ -105,7 +105,7 @@ public function update(Request $request){
 
     toast('Lote editado com sucesso!','success');
 
-    return redirect('/batchs');
+    return redirect('/batch/'.$request->id);
 }
 
 public function showbatch($id){
@@ -181,6 +181,26 @@ public function ativarsobre($id){
     toast('Lote ativado com sucesso!','success');
 
     return redirect('/batch/'.$id);
+}
+
+public function pdf($id){
+
+    $batch = Batch::findOrFail($id);
+
+    $data =[
+        [
+            'code' => $batch->code,
+            'dt_producao' => $batch->cdt_producao,
+            'dt_validade' => $batch->dt_validade,
+            'producao_ecologica' => $batch->producao_ecologica,
+            'producao_sustentavel' => $batch->producao_sustentavel,
+            'status' => $batch->status
+        ]
+    ];
+
+    $pdf = Pdf::loadView('/batchs/pdf',['data' => $data]);
+
+    return $pdf->stream();
 }
 
 }

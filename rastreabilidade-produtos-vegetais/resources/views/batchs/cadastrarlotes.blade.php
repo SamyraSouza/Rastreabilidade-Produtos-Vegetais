@@ -2,7 +2,7 @@
 
 @section('title', 'Cadastrar Lote')
 
-@section('page', 'Cadastrar Lote')
+@section('page', 'Lotes')
 
 @section('content')
 
@@ -38,9 +38,10 @@
             <select name="products_id" id="products_id"  class="js-example-basic-single">
             <option value="">Selecione</option>     
 
-            @foreach($products as $product)
-             
-                  <option value="{{$product->id}}">{{$product->name}} ({{$product->code}})</option>          
+            @foreach($products as $product)  
+            @if($product->status=="1")           
+                  <option value="{{$product->id}}">{{$product->name}} ({{$product->code}})</option> 
+            @endif         
             @endforeach
          
             </select>
