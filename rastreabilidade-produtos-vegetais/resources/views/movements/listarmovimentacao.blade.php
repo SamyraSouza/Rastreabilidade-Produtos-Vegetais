@@ -37,7 +37,7 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Endereço / Tipo de endereço</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tipo Movimentação</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantidade</th>
-                      <th class="text-secondary opacity-7"></th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ações</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -80,13 +80,16 @@
                         <span class="text-secondary text-xs font-weight-bold">{{ $movement->quantidade }}</span>
                       </td>
 
-                      <td class="align-middle">
+                      <td class="align-middle text-center">
+
+                      @if($movement->people_id == $user->id || session('adm') == true)
                       
-                      <a class="marg" href="/movement/edit/{{$movement->id}}"><button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button></a>
+                      <a class="marg text-info" href="/movement/edit/{{$movement->id}}"><i class="fa fa-edit"></i></a>
 
-                      <button onclick="deletarmovimentacao({{$movement->id}})" type="button" class="btn btn-danger marg"><i class="fa fa-trash"></i></button>
+                      <a onclick="deletarmovimentacao({{$movement->id}})" type="button" class="marg text-danger"><i class="fa fa-trash"></i></a>
 
-                      <a href="/movements/pdf/{{$movement->id}}" class="btn btn-light marg">Gerar PDF</a>
+                      @endif
+                      <a href="/movements/pdf/{{$movement->id}}" class="text-secondary text-xs font-weight-bold marg">Gerar PDF</a>
                       </td>
                       
                     </tr> 

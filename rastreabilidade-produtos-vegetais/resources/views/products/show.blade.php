@@ -60,25 +60,31 @@
                 </p>
 
                 <div class="mt-5">
+                    <p class="product-name"> <span class="sobre">Ações:</span></p>
                 <td class="align-middle">
 
+                    @if($product->people_id == $user->id  || session('adm') == true)
                       @if($product->status == "1")
-
-                      <a class="marg" href="/products/edit/{{$product->id}}"><button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button></a>
+                      
+                      <a class="marg" href="/products/edit/{{$product->id}}"><i class="fa fa-edit"></i></a>
 
                       @if($batchs != "" && $batchs->products_id && $batchs->products_id == $product->id)
-                      <button type="button" onclick="inativarsobre({{$product->id}})" id="inativar" class="btn btn-danger marg">Inativar</button>
+                      <a type="button" onclick="inativarsobre({{$product->id}})" id="inativar" class="text-danger marg text-secondary font-weight-bold text-center">Inativar</a>
                       @else
-                      <a href="/products/inativarsobre/{{$product->id}}"><button type="button" id="inativar" class="btn btn-danger marg">Inativar</button></a>
+                      <a href="/products/inativarsobre/{{$product->id}}" class="text-danger marg text-secondary font-weight-bold text-center">Inativar</a>
                       @endif
-                                 
-                      <a  class="marg" href="/batch/create/{{$product->id}}"><button type="button" class="btn btn-success">Cadastrar Lote</button></a>
-              
+                      
+                      <a  class="marg text-success text-secondary font-weight-bold text-center" href="/batch/create/{{$product->id}}">Cadastrar Lote</a>
+                      @endif      
                     @else    
-                    <a class="marg" href="/products/ativarsobre/{{$product->id}}"><button type="button" class="btn btn-success">Ativar</button></a>
+                
                     @endif
 
-                         <a href="/products/pdf/{{$product->id}}" class="btn btn-light marg">Gerar PDF</a>
+                    @if($product->people_id == $user->id && $product->status == 0 || session('adm') == true && $product->status == 0 )
+                    <a class="marg text-success text-secondary font-weight-bold text-center" href="/products/ativarsobre/{{$product->id}}">Ativar</a>
+                    @endif
+
+                    <a href="/pdf/{{$product->id}}" class="marg text-secondary font-weight-bold text-secondary">Gerar PDF</a>
 
                       </td>
 

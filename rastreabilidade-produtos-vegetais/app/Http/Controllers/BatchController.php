@@ -8,6 +8,8 @@ use App\Models\Batch;
 
 use App\Models\Product;
 
+use App\Models\Person;
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -18,28 +20,58 @@ class BatchController extends Controller
 
     public function createbatchsid($id){
 
+        $people = Person::WhereNull('permission')->get();
+
+        $teste = Person::where([
+            ['email', 'like', session('email')]
+        ])->first();
+
         $batchs = Batch::all();
 
         $productchoose = Product::findOrFail($id);
 
         $products = Product::all();
 
-        return view('batchs.cadastrarlote', ['products' => $products, 'batchs' => $batchs, 'productchoose' => $productchoose]);
+        return view('batchs.cadastrarlote', ['products' => $products, 'batchs' => $batchs, 'productchoose' => $productchoose, 'user' => $teste, 'people' => $people]);
         
     }
 
     public function createbatchs(){
 
+    $people = Person::WhereNull('permission')->get();
+        
+    $teste = Person::where([
+        ['email', 'like', session('email')]
+    ])->first();
+
         $batchs = Batch::all();
 
+        if(session('adm') == true){
 
-        $products = Product::all();
+            $products = Product::all();
 
-        return view('batchs.cadastrarlotes', ['products' => $products, 'batchs' => $batchs]);
+        }else{
+
+        $products = Product::where([
+            ['people_id', 'like', $teste->id]
+        ])->get();
+
+        }
+
+        return view('batchs.cadastrarlotes', ['products' => $products, 'batchs' => $batchs, 'user' => $teste, 'people' => $people]);
         
     }
 
     public function storebatch(Request $request){
+
+        $teste = Person::select('id')->where([
+            ['id', 'like', 'people']
+        ])->first();
+
+        
+        $person = Person::select('*')->whereIn('id', function($query) {
+            $query->select('people_id')->from('products');
+        })->first();
 
         $batch = new Batch;
 
@@ -49,6 +81,7 @@ class BatchController extends Controller
         $batch->dt_validade = $request->dt_validade;
         $batch->producao_ecologica = $request->producao_ecologica;
         $batch->producao_sustentavel = $request->producao_sustentavel;
+        $batch->people_id = $person->id;
 
 
         if($request->code){
@@ -64,11 +97,17 @@ class BatchController extends Controller
 
         toast('Lote criado com sucesso!','success');
 
-        return redirect('/batchs');
+        return redirect('/batc');
 
 }
 
 public function showbatchs(){
+
+    $people = Person::WhereNull('permission')->get();
+
+    $teste = Person::where([
+        ['email', 'like', session('email')]
+    ])->first();
 
     $search = request('search');
 
@@ -84,11 +123,47 @@ public function showbatchs(){
 
     $products = Product::all();
 
-    return view('batchs.listarlote', ['batchs' => $batchs,'products' => $products, 'search' => $search]);
+    return view('batchs.listarlote', ['batchs' => $batchs,'products' => $products, 'search' => $search,'user' => $teste, 'people' => $people]);
+
+}
+
+public function showbatc(){
+
+    $people = Person::WhereNull('permission')->get();
+
+    $teste = Person::where([
+        ['email', 'like', session('email')]
+    ])->first();
+
+    $search = request('search');
+
+    if($search){
+
+        $batchs = Batch::where([
+            ['code', 'like', '%'.$search.'%']
+        ])->where([
+            ['people_id', 'like', $teste->id]
+        ])->paginate(5);
+
+    }else{
+        $batchs = Batch::select('*')->from('batches')->where([
+            ['people_id', 'like', $teste->id]
+        ])->paginate(5);
+    }       
+
+    $products = Product::all();
+
+    return view('batchs.listarmeulote', ['batchs' => $batchs,'products' => $products, 'search' => $search,'user' => $teste, 'people' => $people]);
 
 }
 
 public function edit($id){
+
+    $people = Person::WhereNull('permission')->get();
+
+    $teste = Person::where([
+        ['email', 'like', session('email')]
+    ])->first();
 
     $batchs = Batch::findOrFail($id);
 
@@ -96,7 +171,7 @@ public function edit($id){
 
     $product = Product::findOrFail($produto);
 
-    return view('batchs.edit', ['batchs'=> $batchs, 'product' => $product]);
+    return view('batchs.edit', ['batchs'=> $batchs, 'product' => $product, 'user' => $teste, 'people' => $people]);
 }
 
 public function update(Request $request){
@@ -105,10 +180,16 @@ public function update(Request $request){
 
     toast('Lote editado com sucesso!','success');
 
-    return redirect('/batch/'.$request->id);
+    return redirect('/batc');
 }
 
 public function showbatch($id){
+
+    $people = Person::WhereNull('permission')->get();
+
+    $teste = Person::where([
+        ['email', 'like', session('email')]
+    ])->first();
 
     $batch = Batch::findOrFail($id);
 
@@ -118,7 +199,7 @@ public function showbatch($id){
 
     $products = Product::all();
 
-    return view('batchs.show', ['product'=>$product, 'batch' => $batch,'products' => $products]);
+    return view('batchs.show', ['product'=>$product, 'batch' => $batch,'products' => $products,'user' => $teste, 'people' => $people]);
     
 }
 
@@ -132,7 +213,7 @@ public function inativar($id){
 
     toast('Lote inativado com sucesso!','success');
 
-    return redirect('/batchs');
+    return redirect('/batc');
 }
 
 public function inativarsobre($id){
@@ -167,7 +248,7 @@ public function ativar($id){
 
         toast('Lote ativado com sucesso!','success');
 
-    return redirect('/batchs');
+    return redirect('/batc');
 }
 
 public function ativarsobre($id){
@@ -187,6 +268,8 @@ public function pdf($id){
 
     $batch = Batch::findOrFail($id);
 
+    $pessoa = Person::findOrFail($batch->id);
+
     $data =[
         [
             'code' => $batch->code,
@@ -194,7 +277,8 @@ public function pdf($id){
             'dt_validade' => $batch->dt_validade,
             'producao_ecologica' => $batch->producao_ecologica,
             'producao_sustentavel' => $batch->producao_sustentavel,
-            'status' => $batch->status
+            'status' => $batch->status,
+            'cnpj' => $pessoa->cnpj
         ]
     ];
 

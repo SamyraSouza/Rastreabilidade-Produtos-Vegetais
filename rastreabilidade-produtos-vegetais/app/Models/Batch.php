@@ -14,6 +14,10 @@ class Batch extends Model
         return $this->belongsTo('App\Models\Movement');
     }
 
+    public function people(){
+        return $this->hasOne('App\Models\Person');
+    }
+
     protected $guarded = [];
     
     

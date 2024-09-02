@@ -70,30 +70,31 @@
 
                 <p class="product-name"> <span class="sobre">  Data de Criação:</span> {{date('d/m/Y', strtotime($batch->created_at))}}</p>
 
+               
                 <div class="mt-5">
                 <td class="align-middle">
-
+                 @if($batch->people_id == $user->id || session('adm') == true)
                       @if($batch->status == "1")
 
-                      <a class="marg" href="/batch/edit/{{$batch->id}}"><button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button></a>
+                      <a class="marg text-secondary font-weight-bold text-center" href="/batch/edit/{{$batch->id}}"><i class="fa fa-edit"></i></a>
 
-                      <a class="marg" href="/batchs/inativarsobre/{{$batch->id}}"><button type="button" class="btn btn-danger">Inativar</button></a>
+                      <a class="marg text-danger font-weight-bold text-center" href="/batchs/inativarsobre/{{$batch->id}}">Inativar</a>
 
-                      <a class="marg" href="/movement/create/{{$batch->id}}"><button type="button" class="btn btn-success">Cadastrar Movimentação</button><a> 
+                      <a class="marg text-success font-weight-bold text-center" href="/movement/create/{{$batch->id}}">Cadastrar Movimentação<a> 
                  
                     @else    
                     
                     @foreach($products as $product)
                       @if($product->id == $batch->products_id && $product->status == "0")
-                      <button type="button" onclick="ativarsobre({{$batch->id}})" class="btn btn btn-outline-success marg">Ativar Lote</button>    
+                      <a type="button" onclick="ativarsobre({{$batch->id}})" class="marg text-success font-weight-bold text-center">Ativar Lote</a>    
                       @elseif($product->id == $batch->products_id && $product->status == "1")
-                     <a href="/batchs/ativarsobre/{{$batch->id}}"><button type="button" class="btn btn btn-outline-success marg">Ativar Lote</button></a>  
+                     <a href="/batchs/ativarsobre/{{$batch->id}}" class="marg text-success font-weight-bold text-center">Ativar Lote</a>  
                       @endif                                          
                       @endforeach
 
                     @endif
-
-                         <a href="/batchs/pdf/{{$batch->id}}" class="btn btn-light marg">Gerar PDF</a>
+                        @endif
+                         <a href="/batchs/pdf/{{$batch->id}}" class="marg text-secondary font-weight-bold text-center">Gerar PDF</a>
 
                       </td>
 

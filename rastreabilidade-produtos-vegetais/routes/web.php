@@ -24,9 +24,15 @@ Route::get('/sair', [PersonController::class, 'logout']);
 //Mostrar Página Inicial
 Route::get('/index', [ProductController::class, 'index'])->middleware(AutenticacaoMiddleware::class);
 
+//mudar imagem de fundo
+Route::put('/image/update/{id}', [PersonController::class, 'mudarimagem'])->middleware(AutenticacaoMiddleware::class);
+
 ///////////////////////////  PRODUTO /////////////////////////////////////////
 //Mostar Produto
 Route::get('/products', [ProductController::class, 'showproducts'])->middleware(AutenticacaoMiddleware::class);
+
+//Mostar Meus Produtos
+Route::get('/produc', [ProductController::class, 'showproduc'])->middleware(AutenticacaoMiddleware::class);
 
 Route::get('/products/{id}', [ProductController::class, 'showproduct'])->middleware(AutenticacaoMiddleware::class);
 
@@ -52,7 +58,7 @@ Route::get('/products/ativarsobre/{id}', [ProductController::class, 'ativarsobre
 Route::get('/batchs/{id}', [BatchController::class, 'showbatchs'])->middleware(AutenticacaoMiddleware::class);
 
 // Gerar pdf produto
-Route::get('/products/pdf/{id}', [ProductController::class, 'pdf'])->middleware(AutenticacaoMiddleware::class);
+Route::get('/pdf/{id}', [ProductController::class, 'pdf'])->middleware(AutenticacaoMiddleware::class);
 
 //botao inativar
 Route::get('/products/botao/{id}', [ProductController::class, 'botao'])->middleware(AutenticacaoMiddleware::class);
@@ -72,6 +78,9 @@ Route::put('/batchs/update/{id}', [BatchController::class, 'update'])->middlewar
 
 //Mostar Lote
 Route::get('/batchs', [BatchController::class, 'showbatchs'])->middleware(AutenticacaoMiddleware::class);
+
+//Mostar Meus Lote
+Route::get('/batc', [BatchController::class, 'showbatc'])->middleware(AutenticacaoMiddleware::class);
 
 Route::get('/batch/{id}', [BatchController::class, 'showbatch'])->middleware(AutenticacaoMiddleware::class);
 
@@ -100,9 +109,13 @@ Route::post('/movements', [MovementController::class, 'storemovement'])->middlew
 //Mostar Movimentação
 Route::get('/movements', [MovementController::class, 'showmovements'])->middleware(AutenticacaoMiddleware::class);
 
+//Mostar minha Movimentação
+Route::get('/movem', [MovementController::class, 'showmovem'])->middleware(AutenticacaoMiddleware::class);
+
 //editar movimentação
 Route::get('/movement/edit/{id}',[MovementController::class, 'edit'])->middleware(AutenticacaoMiddleware::class);
 Route::put('/movement/update/{id}',[MovementController::class, 'update'])->middleware(AutenticacaoMiddleware::class);
+
 
 //excluir movimentação
 Route::get('/movement/delete/{id}', [MovementController::class, 'destroy'])->middleware(AutenticacaoMiddleware::class);
@@ -115,8 +128,13 @@ Route::get('/movements/pdf/{id}', [MovementController::class, 'pdf'])->middlewar
 Route::post('/people', [PersonController::class, 'storeperson']);
 
 //Ver pessoas não cadastradas
-Route::get('/peoples', [PersonController::class, 'showpeople']);
+Route::get('/peoples', [PersonController::class, 'showpeople'])->middleware(AutenticacaoMiddleware::class);
 
 //Permitir pessoas
-Route::get('/permission/{id}', [PersonController::class, 'permission']);
+Route::get('/permission/{id}', [PersonController::class, 'permission'])->middleware(AutenticacaoMiddleware::class);
 
+//pegar usuário
+Route::get('/profile/{id}', [PersonController::class, 'showperson'])->middleware(AutenticacaoMiddleware::class);
+
+//editar movimentação
+Route::put('/people/update/{person}',[PersonController::class, 'update'])->middleware(AutenticacaoMiddleware::class);

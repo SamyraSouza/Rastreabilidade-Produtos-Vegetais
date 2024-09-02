@@ -57,10 +57,17 @@
                 @endif
 
                 @if(session('msg-success'))
-                <div class="alert alert-success" role="alert">
-                   <span class="light">{{session('msg-success')}}</span> 
+                <div class="mb-3" style="color:red; font-weight:600;" role="alert">
+                   <span>{{session('msg-success')}}</span> 
                 </div>
                  @endif
+
+                 @if(session('msg-su'))
+                 <div class="alert alert-success" role="alert">
+                  <span class="light">{{session('msg-su')}}</span> 
+               </div>
+              
+                  @endif
 
                   <h4 class="font-weight-bolder">Login</h4>
                   <p class="mb-0">Entre com seu email e senha para continuar</p>

@@ -113,3 +113,16 @@ function deletarmovimentacao(id){
     });
 }
 
+function mudarimagem() {
+  var fotinha = document.getElementById('fotinha');
+  var edite = document.getElementById('editar');
+  var teste = document.getElementById('foto');
+  var enviar = document.getElementById('enviar');
+
+  edite.style.display = 'none';
+  fotinha.style.display = 'none';
+  teste.style.display = 'block';
+  enviar.style.display = 'block';
+
+}
+

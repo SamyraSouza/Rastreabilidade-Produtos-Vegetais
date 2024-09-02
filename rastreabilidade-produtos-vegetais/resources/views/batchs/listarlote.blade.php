@@ -104,8 +104,14 @@
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{$batch->code}}</span>
                       </td>
-                      <td class="align-middle">                                   
-                      <a class="marg" href="/movement/create/{{$batch->id}}"><button type="button" class="btn btn-success">Cadastrar Movimentação</button><a> 
+                      <td class="align-middle text-center">      
+                        @if($user->id == $batch->people_id || session('adm') == true)                                                    
+                        <a class="marg text-info" href="/batch/edit/{{$batch->id}}"><i class="fa fa-edit"></i><a> 
+                                                                                                         
+                      <a class="text-secondary text-xs font-weight-bold text-cente text-success marg" href="/movement/create/{{$batch->id}}">Cadastrar Movimentação<a>
+                       
+                        <a type="button" href="/batchs/inativar/{{$batch->id}}" class="text-secondary text-xs font-weight-bold text-cente text-danger marg">Inativar</a> 
+                        @endif 
                       </td>
                       <td class="align-middle">  
                       <a class="marg" href="/batch/{{$batch->id}}"><i class="fa fa-eye"></i></a>
@@ -148,16 +154,21 @@
                      
                       </td>
                       <td class="align-middle text-center">
+                        
                         <span class="text-secondary text-xs font-weight-bold">{{$batch->code}}</span>
                       </td>
-                      <td class="align-middle">
-                      @foreach($products as $product)
-                      @if($product->id == $batch->products_id && $product->status == "0")
-                      <button type="button" onclick="ativar({{$batch->id}})" class="btn btn btn-outline-success marg">Ativar Lote</button>    
-                      @elseif($product->id == $batch->products_id && $product->status == "1")
-                     <a href="/batchs/ativar/{{$batch->id}}"><button type="button" class="btn btn btn-outline-success marg">Ativar Lote</button></a>  
-                      @endif                                                             
-                      @endforeach    
+                      <td class="align-middle text-center">
+                        @if($user->id == $batch->people_id || session('adm') == true)                                                    
+
+                         @foreach($products as $product)
+                         @if($product->id == $batch->products_id && $product->status == "0")
+                         <a type="button" onclick="ativar({{$batch->id}})" class="text-secondary text-xs font-weight-bold text-cente text-success marg">Ativar Lote</a>    
+                         @elseif($product->id == $batch->products_id && $product->status == "1")
+                        <a href="/batchs/ativar/{{$batch->id}}"  class="text-secondary text-xs font-weight-bold text-cente text-success marg">Ativar Lote</a>  
+                         @endif                                                             
+                         @endforeach 
+                     @endif
+                        
                       </td>
                       <td class="align-middle">
                       <a class="marg" href="/batch/{{$batch->id}}"><i class="fa fa-eye"></i></a>

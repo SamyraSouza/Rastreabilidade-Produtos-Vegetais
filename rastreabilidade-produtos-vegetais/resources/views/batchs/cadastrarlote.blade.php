@@ -35,7 +35,7 @@
                 <div class="col-md-6">
                      <label for="products_id">Selecione o Produto:</label>
                   <div class="form-group">
-            <select name="products_id" id="products_id"  class="js-example-basic-single">
+            <select name="products_id" id="products_id" class="js-example-basic-single">
 
             @if($productchoose->id != "")
                 <option value="{{$productchoose->id}}">{{$productchoose->name}} ({{$productchoose->code}})</option>

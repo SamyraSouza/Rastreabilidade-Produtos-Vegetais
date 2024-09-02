@@ -30,7 +30,9 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">CPF</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Endereço</th>
-                      <th class="text-secondary opacity-7"></th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo Pessoa</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo Perfil</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ação</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
@@ -40,7 +42,7 @@
 
                     @if(count($people) == 0)
                     <tr>
-                      <td colspan="6">
+                      <td colspan="7">
                           <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm text-center mt-3 mb-3">Não há pessoa pedindo permissão</h6>
                       </div>
@@ -73,9 +75,17 @@
                         <p class="text-xs font-weight-bold mb-0">{{$person->endereco}}</p>
                       </td>
 
-                      <td class="align-middle">       
+                      <td class="align-middle text-center">
+                        <p class="text-xs font-weight-bold mb-0">{{$person->tipo_pessoa}}</p>
+                      </td>
 
-                        <a class="marg" href="/permission/{{ $person->id }}"><button type="button" class="btn btn-success">Permitir Acesso</button></a>
+                      <td class="align-middle text-center">
+                        <p class="text-xs font-weight-bold mb-0">{{$person->tipo_perfil}}</p>
+                      </td>
+
+                      <td class="align-middle text-center">       
+
+                        <a class="marg text-xs text-success font-weight-bold" href="/permission/{{ $person->id }}">Permitir Acesso</a>
                                
                       </td>
                     </tr> 

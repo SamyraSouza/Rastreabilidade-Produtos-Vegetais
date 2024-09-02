@@ -40,7 +40,7 @@
                 
                 <tr>  
                 <th>Código: {{$product['code']}}</th> 
-                <td>Propriedade: </td>  
+                <td>Proprietário: {{$product['pessoa']}}</td>  
                 <td>Data Emissão:   <span id="data">
                                                 @php
                                                     $data_emi = date('d/m/Y');
@@ -53,7 +53,7 @@
 
                 <tr> 
                 <td>Status: @if($product['status'] == 1)Ativo @else Inativo @endif</td>
-                <td colspan="2">Cnpj Produtor: </td>                             
+                <td colspan="2">Cnpj Produtor: {{$product['cnpj']}}</td>                             
                 </tr>
 
                 <tr> 

@@ -48,7 +48,7 @@
                 </tr>
 
                 <tr> 
-                <td colspan="3">Cnpj Produtor: </td>                             
+                <td colspan="3">Cnpj Produtor: {{$batch['cnpj']}}</td>                             
                 </tr>
  
             </table>

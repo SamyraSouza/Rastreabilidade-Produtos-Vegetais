@@ -30,7 +30,7 @@
                   <div class="form-group">
                     <label for="batches_id" class="form-control-label">Selecione o Lote</label>
 
-              <select name="batches_id" id="batches_id"  class="js-example-basic-single">
+              <select name="batches_id" id="batches_id" style="width:200px;" class="js-example-basic-single">
                 @foreach($batchs as $batch)             
                           <option value=" {{$batch->id}} ">{{$batch->code}}</option>          
                 @endforeach        
@@ -44,7 +44,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                       <label for="nome" class="form-control-label">Nome</label>
-                      <input required class="form-control" type="text" name="nome" id="nome" placeholder="Nome">
+                      <input required class="form-control" value="{{ $user->nome }}" type="text" name="nome" id="nome" placeholder="Nome">
                     </div>
                 </div>
 
@@ -52,8 +52,8 @@
                   
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="razao_social" class="form-control-label">Razão Social</label>
-                        <input required class="form-control" type="text" name="razao_social" id="razao_social" placeholder="Razão Social">
+                        <label for="razao_social" class="form-control-label mt-1">Razão Social</label>
+                        <input required class="form-control" value="{{ $user->razao_social }}" type="text" name="razao_social" id="razao_social" placeholder="Razão Social">
                       </div>
                     </div>
   
@@ -74,7 +74,7 @@
                  
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="documento" class="form-control-label">Documento</label>
+                          <label for="documento" class="form-control-label mt-3">Documento</label>
                           <input required class="form-control" type="text" name="documento" id="documento" placeholder="Documento">
                         </div>
                      </div>                         
@@ -83,9 +83,19 @@
                 <div class="form-group">
                 <label class="mt-3" for="tipo_endereco">Tipo de Endereço:</label>
                     <select name="tipo_endereco" id="tipo_endereco" class="form-control">
-                        <option value="Endereço">Endereço</option>
+                      @if($user->tipo_endereco == "Endereço")
+                        <option selected value="Endereço">Endereço</option>
                         <option value="Coordenada">Coordenada</option>
                         <option value="CCIR">CCIR</option>
+                      @elseif($user->tipo_endereco == "Coordenada")
+                      <option value="Endereço">Endereço</option>
+                        <option selected value="Coordenada">Coordenada</option>
+                        <option value="CCIR">CCIR</option>
+                        @else
+                        <option value="Endereço">Endereço</option>
+                        <option value="Coordenada">Coordenada</option>
+                        <option selected value="CCIR">CCIR</option>
+                      @endif
                     </select>      
                 </div>
             </div>
@@ -94,8 +104,8 @@
          
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="endereco" class="form-control-label">Endereço</label>
-                    <input required class="form-control" type="text" name="endereco" id="endereco" placeholder="Endereço">
+                    <label for="endereco" class="form-control-label mt-3">Endereço</label>
+                    <input required class="form-control" type="text" name="endereco" value="{{ $user->endereco }}" id="endereco" placeholder="Endereço">
                   </div>
                 </div>
 
@@ -114,7 +124,7 @@
              
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="quantidade" class="form-control-label">Quantidade</label>
+                    <label for="quantidade" class="form-control-label mt-3">Quantidade</label>
                     <input required class="form-control" type="number" name="quantidade" id="quantidade" placeholder="Quantidade">
                   </div>
                 </div>

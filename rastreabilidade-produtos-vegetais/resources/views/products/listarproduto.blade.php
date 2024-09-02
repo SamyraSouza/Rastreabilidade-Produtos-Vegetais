@@ -60,6 +60,8 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Código</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Produtor</th>
+                      
                       <th class="text-secondary opacity-7"></th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
@@ -91,9 +93,22 @@
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{$product->description}}</span>
                       </td>
-                      <td class="align-middle">                                                    
-                        <a class="marg" href="/batch/create/{{$product->id}}"><button type="button" class="btn btn-success">Cadastrar Lote</button></a>
-                               
+
+                      <td class="text-center">
+                        <span class="text-secondary text-xs font-weight-bold">@foreach($pessoa as $produtor)@if($produtor->id == $product->people_id){{ $produtor->nome }}@endif @endforeach</span>
+                      </td>
+
+                     
+                      <td class="align-middle text-center">
+                         @if($user->id == $product->people_id || session('adm') == true)                                                    
+                         <a class="marg text-info" href="/products/edit/{{$product->id}}"><i class="fa fa-edit"></i><a>                                                                    
+                          <a href="/batch/create/{{$product->id}}"  class="text-secondary text-xs font-weight-bold text-cente text-success marg">Cadastrar Lote</a>
+  
+                          @if($product->status == "1")
+                          <a type="button" onclick="inativar({{$product->id}})" id="inativar" class="text-secondary text-xs font-weight-bold text-cente text-danger marg">Inativar</a>
+                            @endif
+                      @endif
+
                       </td>
                       <td class="align-middle"> 
                          <a class="marg" href="/products/{{$product->id}}"><i class="fa fa-eye"></i></a>
@@ -128,11 +143,17 @@
                         <span class="text-secondary text-xs font-weight-bold">{{$product->description}}</span>
                       </td>
 
-                      <td class="align-middle">               
-                      <a href="/products/ativar/{{$product->id}}"><button type="button" class="btn btn btn-outline-success marg">Ativar Produto</button></a>           
-                      </td>       
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold text-center">@foreach($pessoa as $produtor)@if($produtor->id == $product->people_id){{ $produtor->nome }}@endif @endforeach</span>
+                      </td>
+                     
+                      <td class="align-middle text-center">    
+                       @if($product->people_id == $user->id  || session('adm') == true)           
+                      <a href="/products/ativar/{{$product->id}}" class="text-secondary text-xs font-weight-bold text-center text-success">Ativar Produto</a> @endif            
+                      </td>   
+                        
                       <td class="align-middle"> 
-                      <a clas="marg" href="/products/{{$product->id}}"><i class="fa fa-eye"></i></a>
+                      <a class="marg" href="/products/{{$product->id}}"><i class="fa fa-eye"></i></a>
                       </td>
                     </tr> 
                     @endif

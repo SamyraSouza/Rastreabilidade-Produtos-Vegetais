@@ -36,9 +36,9 @@
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="/index">
+      <a class="navbar-brand m-0 d-flex justify-content-center align-middle" href="/index">
         <img src="/img/logistica-verde.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">TSN Logística</span>
+        <span class="ms-1 font-weight-bold mt-2">TSN Logística</span>
       </a>
     </div>
 
@@ -70,7 +70,13 @@
             </div>
             <span class="nav-link-text ms-1">Cadastrar Produdo</span>
           </a>
-              </div>
+
+    
+              </div>      <a class="nav-link link-nav" href="/produc">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            </div>
+            <span class="nav-link-text ms-1">Meus Produtos</span>
+          </a>
             </div>
 
    
@@ -90,6 +96,12 @@
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             </div>
             <span class="nav-link-text ms-1">Cadastrar Lote</span>
+          </a>
+
+          <a class="nav-link link-nav" href="/batc">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            </div>
+            <span class="nav-link-text ms-1">Meus Lotes</span>
           </a>
 
           <a class="nav-link link-nav" href="/movements/rastrear">
@@ -119,17 +131,24 @@
             <span class="nav-link-text ms-1 link-nav na">Cadastrar Movimentação</span>
           </a>
 
+          
+          <a class="nav-link link-nav" href="/movem">
+            <div class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center" style="margin-left: -60px;">
+            </div>
+            <span class="nav-link-text ms-1 link-nav na">Minhas Movimentações</span>
+          </a>
+
     </div>
  
-      <a class="nav-link link-nav" href="/peoples">
+      @if(@session('adm') == true)
+        <a class="nav-link link-nav" href="/peoples">
         <div class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center" style="margin-left: -80px;">            
         </div>
         @if(isset($people) && count($people) == 0)
         <span class="nav-link-text ms-1">Pessoas Não Cadastradas</span>
         @else
         <span class="nav-link-text ms-1">Pessoas Não Cadastradas <i class="fa fa-warning icon"></i></span>      
-        @endif
-        
+        @endif              
       </a>
 
       <a class="nav-link link-nav" href="/people/create">
@@ -137,6 +156,7 @@
         </div>
         <span class="nav-link-text ms-1 link-nav">Cadastrar Pessoas</span>
       </a>
+   @endif
  </div>
   </div>
       </ul>
@@ -156,22 +176,24 @@
           </ol>
           <h6 class="font-weight-bolder text-white mb-0">@yield('page')</h6>
         </nav>
-
          <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group" style="margin-right:30px;">              
-                <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none;">
-                  <img src="/img/perfil.jpg" alt="" width="50px" height="50px" style="border-radius: 90px;">
+            <div class="input-group" style="margin-right:30px;"> 
+                @if(@session('adm') == false)            
+                <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none;">                     
+                  <img src="/img/people/@if(isset($user)){{$user->imagem_perfil}}@endif" alt="" width="50px" height="50px" style="border-radius: 90px;">               
                 </button>
+
                 <div class="dropdown-menu mt-5" aria-labelledby="dropdownMenuButton" style="margin-left: -130px;">
-                  <p class="nav-link-text" style="margin-left: 20px; margin-top: 10px;">Nome</p>
-                  <a class="dropdown-item" href="/profile">Ver Perfil</a>
+                  <p class="nav-link-text" style="margin-left: 20px; margin-top: 10px;">@if(isset($user)){{ $user->nome }}@endif</p>
+                  <a class="dropdown-item" href="/profile/@if(isset($user)){{$user->id}}@endif">Ver Perfil</a>
                 </div>
+               @endif
             </div>    
 
             <div class="input-group">
-            <a href="/sair" class="nav-link text-white font-weight-bold px-0">
-                <span class="d-sm-inline d-none" style="color:rgb(255, 39, 39);">Sair</span>
+            <a href="/sair" class="nav-link text-white font-weight-bold px-0" style=" width: 60px;">
+                <span class="d-sm-inline d-none" style="color:rgb(255, 39, 39);">Sair <i class="fa fa-sign-out" aria-hidden="true"></i></span>
               </a>
             </div>
           </div>        
@@ -187,10 +209,19 @@
 
 
 </body>
-<!-- Core -->
-<script src="/js/core/popper.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js""></script>
 <script src="/js/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<script>
+  $('#telefone').mask('(00)00000-0000');
+  $('#cpf').mask('000.000.000-00');
+  $('#cnpj').mask('00. 000. 000/0000-00');
+</script>
+<!-- Core -->
+<script src="/js/core/popper.min.js"></script>
+
 <script src="/js/core/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js" integrity="sha512-MpDFIChbcXl2QgipQrt1VcPHMldRILetapBl5MPCA9Y8r7qvlwx1/Mc9hNTzY+kS5kX6PdoDq41ws1HiVNLdZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 

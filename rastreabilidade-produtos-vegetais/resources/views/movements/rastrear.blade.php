@@ -15,11 +15,11 @@
     </div>
 @endif
 
-      <div class="row" style="display: flex;">
-          <div class="card mb-4" style=" width:50%;">
+      <div class="row" style="display: flex; width:1500px; margin-left:50px;">
+          <div class="card mb-4" style=" width:100%;">
             <div class="card-header pb-4">
 
-     <div class="col-md-10 mt-3 mb-3">
+     <div class="col-md-20 mt-3 mb-3">
        <label for="search"><h1>Digite o Código do Lote Aqui</h1></label>
        <div class="input-group mb-3">
         <form class="d-flex justify-content-center wid mt-4" action="/movements/rastrear" method="GET">
@@ -34,11 +34,11 @@
        <table class="table align-items-center mb-0">
         <thead>
           <tr>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Código Lote</th>
+            <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Código Lote</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pessoa Responsável</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Endereço / Tipo de endereço</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tipo Movimentação</th>
-            <th class="text-secondary opacity-7">Data Movimentação</th>
+            <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tipo Movimentação</th>
+            <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Data Movimentação</th>
           </tr>
         </thead>
 

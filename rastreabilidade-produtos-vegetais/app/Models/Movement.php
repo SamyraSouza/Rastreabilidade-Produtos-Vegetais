@@ -12,6 +12,10 @@ class Movement extends Model
         return $this->hasOne('App\Models\Batch');
     }
 
+    public function people(){
+        return $this->hasOne('App\Models\Person');
+    }
+    
     protected $guarded = [];
     
 }
