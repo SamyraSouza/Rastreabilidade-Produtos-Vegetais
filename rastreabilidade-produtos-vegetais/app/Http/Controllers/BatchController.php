@@ -268,8 +268,8 @@ public function pdf($id){
 
     $batch = Batch::findOrFail($id);
 
-    $pessoa = Person::findOrFail($batch->id);
-
+    $pessoa = Person::select('*')->where('id', $batch->people_id)->first();
+    
     $data =[
         [
             'code' => $batch->code,
@@ -282,7 +282,8 @@ public function pdf($id){
         ]
     ];
 
-    $pdf = Pdf::loadView('/batchs/pdf',['data' => $data]);
+   
+    $pdf = Pdf::loadView('batchs.pdf',['data' => $data]);
 
     return $pdf->stream();
 }

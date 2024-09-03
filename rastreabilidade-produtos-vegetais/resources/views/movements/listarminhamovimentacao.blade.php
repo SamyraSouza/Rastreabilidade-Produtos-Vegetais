@@ -17,6 +17,11 @@
     </div>
       @endif
     
+      @if(count($movements)==0)
+      <div class="alert alert-danger mt-6" role="alert">
+        <div class="light">Não há movimentações disponíveis.</div>
+      </div>
+      @else
     
 
       <div class="row">
@@ -102,4 +107,5 @@
         </div>
       </div>
 
+      @endif
 @endsection

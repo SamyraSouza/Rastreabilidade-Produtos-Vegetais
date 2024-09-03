@@ -192,7 +192,7 @@
         </form>
       <div class="col-md-4">
         <div class="card card-profile">
-          <img src=" @if($user->imagem_fundo == "") /img/flores.jpg @else /img/perfil/{{ $user->imagem_fundo }}@endif" alt="Image placeholder" class="card-img-top" style="height: 400px;">
+          <img src=" @if($user->imagem_fundo == "") /img/fundo.png @else /img/perfil/{{ $user->imagem_fundo }}@endif" alt="Image placeholder" class="card-img-top" style="height: 400px;">
           <a class="marg text-bold" style="font-weight: 800;" id="editar" style="margin-top: -25px;" onCLick="mudarimagem()"><i class="fa fa-edit" style="cursor: pointer;"></i><a> 
             <div class="d-flex">
               <form class="d-flex" action="/image/update/{{$user->id}}" method="POST" enctype="multipart/form-data">
@@ -205,7 +205,7 @@
             <div class="col-4 col-lg-4 order-lg-2">
               <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
                 <a href="javascript:;">
-                  <img src="/img/people/{{ $user->imagem_perfil }}" style="height: 140px;" id="fotinha" class="rounded-circle img-fluid border border-2 border-white">
+                  <img src="@if($user->imagem_perfil != "") /img/people/{{ $user->imagem_perfil }} @else /img/perfil.jpg @endif" style="height: 140px;" id="fotinha" class="rounded-circle img-fluid border border-2 border-white">
                 </a>
               </div>
             </div>

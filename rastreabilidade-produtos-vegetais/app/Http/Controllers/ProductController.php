@@ -317,7 +317,7 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
-        $person = Person::findOrFail($product->id);
+        $person = Person::select('*')->where('id', $product->people_id)->first();
 
         $data =[
             [

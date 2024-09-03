@@ -17,7 +17,11 @@
     </div>
       @endif
     
-    
+     @if(count($movements)==0)
+                    <div class="alert alert-danger mt-6" role="alert">
+                      <div class="light">Não há movimentações disponíveis.</div>
+                    </div>
+                    @else
 
       <div class="row">
         <div class="col-12">
@@ -29,6 +33,7 @@
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                   <thead>
+
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Código Lote</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pessoa Responsável</th>
@@ -40,7 +45,9 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ações</th>
                     </tr>
                   </thead>
+
                   <tbody>
+
 
                   @foreach($movements as $movement) 
                     <tr>
@@ -101,5 +108,5 @@
           </div>{{ $movements->links()}}
         </div>
       </div>
-
+@endif
 @endsection

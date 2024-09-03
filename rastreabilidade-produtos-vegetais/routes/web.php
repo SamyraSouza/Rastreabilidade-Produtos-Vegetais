@@ -24,6 +24,9 @@ Route::get('/sair', [PersonController::class, 'logout']);
 //Mostrar Página Inicial
 Route::get('/index', [ProductController::class, 'index'])->middleware(AutenticacaoMiddleware::class);
 
+//Checar senha
+Route::get('/senha/{senha}', [PersonController::class, 'senha'])->middleware(AutenticacaoMiddleware::class);
+
 //mudar imagem de fundo
 Route::put('/image/update/{id}', [PersonController::class, 'mudarimagem'])->middleware(AutenticacaoMiddleware::class);
 
@@ -89,7 +92,7 @@ Route::get('/batchs/inativar/{id}', [BatchController::class, 'inativar'])->middl
 Route::get('/batchs/inativarsobre/{id}', [BatchController::class, 'inativarsobre'])->middleware(AutenticacaoMiddleware::class);
 
 // Gerar pdf lote
-Route::get('/batchs/pdf/{id}', [BatchController::class, 'pdf'])->middleware(AutenticacaoMiddleware::class);
+Route::get('/batchs/pdf/{id}', [BatchController::class, 'pdf']);
 
 //ativar Lote
 Route::get('/batchs/ativar/{id}', [BatchController::class, 'ativar'])->middleware(AutenticacaoMiddleware::class);
@@ -135,6 +138,9 @@ Route::get('/permission/{id}', [PersonController::class, 'permission'])->middlew
 
 //pegar usuário
 Route::get('/profile/{id}', [PersonController::class, 'showperson'])->middleware(AutenticacaoMiddleware::class);
+
+//esqueceu a senha
+Route::get('/forgotpassword/{email}', [PersonController::class, 'esqueceusenha']);
 
 //editar movimentação
 Route::put('/people/update/{person}',[PersonController::class, 'update'])->middleware(AutenticacaoMiddleware::class);

@@ -37,6 +37,7 @@ function inativar(id){
         text: "Se você inativar o produto irá inativar o lote!",
         icon: "warning",
         showCancelButton: true,
+        cancelButtonText: "Cancelar",
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Inativar"
@@ -53,6 +54,7 @@ function inativarsobre(id){
         text: "Se você inativar o produto irá inativar o lote!",
         icon: "warning",
         showCancelButton: true,
+        cancelButtonText: "Cancelar",
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Inativar"
@@ -71,6 +73,7 @@ function ativar(id){
         text: "Se você ativar o lote, irá ativar o produto!",
         icon: "warning",
         showCancelButton: true,
+        cancelButtonText: "Cancelar",
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Ativar"
@@ -87,6 +90,7 @@ function ativarsobre(id){
         text: "Se você ativar o lote, irá ativar o produto!",
         icon: "warning",
         showCancelButton: true,
+        cancelButtonText: "Cancelar",
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Ativar"
@@ -105,6 +109,7 @@ function deletarmovimentacao(id){
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
       confirmButtonText: "Deletar"
     }).then((result) => {
       if (result.isConfirmed) {
@@ -125,4 +130,61 @@ function mudarimagem() {
   enviar.style.display = 'block';
 
 }
+
+function mudarsenha(){
+
+  Swal.fire({
+    title: "Digite sua nova senha: ",
+    input: "password",
+    inputAttributes: {
+      autocapitalize: "off"
+    },
+    showCancelButton: true,
+    cancelButtonText: "Cancelar",
+    confirmButtonText: "Mudar",
+    showLoaderOnConfirm: true,
+    preConfirm: async (senha) => {
+      try {
+        var senha = `${senha}`;
+
+        window.location.href = "/senha/"+senha;
+
+      } catch (error) {
+        Swal.showValidationMessage(`
+          Request failed: ${error}
+        `);
+      }
+    }
+    });
+    
+} 
+
+
+function esqueceusenha(){
+
+  Swal.fire({
+    title: "Digite seu email: ",
+    input: "text",
+    inputAttributes: {
+      autocapitalize: "off"
+    },
+    showCancelButton: true,
+    cancelButtonText: "Cancelar",
+    confirmButtonText: "Checar",
+    showLoaderOnConfirm: true,
+    preConfirm: async (email) => {
+      try {
+        var email = `${email}`;
+
+        window.location.href = "/forgotpassword/"+email;
+
+      } catch (error) {
+        Swal.showValidationMessage(`
+          Request failed: ${error}
+        `);
+      }
+    }
+    });
+    
+} 
 

@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="/img/logistica-verde.png">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js""></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="/js/jquery-3.7.1.min.js"></script>
   <script src="/js/script.js"></script>
   <title>
@@ -68,7 +68,7 @@
           <a class="nav-link link-nav" href="/product/create">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             </div>
-            <span class="nav-link-text ms-1">Cadastrar Produdo</span>
+            <span class="nav-link-text ms-1">Cadastrar Produto</span>
           </a>
 
     
@@ -151,11 +151,6 @@
         @endif              
       </a>
 
-      <a class="nav-link link-nav" href="/people/create">
-        <div class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center" style="margin-left: -65px;">
-        </div>
-        <span class="nav-link-text ms-1 link-nav">Cadastrar Pessoas</span>
-      </a>
    @endif
  </div>
   </div>
@@ -181,13 +176,15 @@
             <div class="input-group" style="margin-right:30px;"> 
                 @if(@session('adm') == false)            
                 <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none;">                     
-                  <img src="/img/people/@if(isset($user)){{$user->imagem_perfil}}@endif" alt="" width="50px" height="50px" style="border-radius: 90px;">               
+                  <img src="@if($user->imagem_perfil == "")/img/perfil.jpg @else /img/people/{{ $user->imagem_perfil }} @endif" alt="" width="50px" height="50px" style="border-radius: 90px;">               
                 </button>
 
                 <div class="dropdown-menu mt-5" aria-labelledby="dropdownMenuButton" style="margin-left: -130px;">
                   <p class="nav-link-text" style="margin-left: 20px; margin-top: 10px;">@if(isset($user)){{ $user->nome }}@endif</p>
                   <a class="dropdown-item" href="/profile/@if(isset($user)){{$user->id}}@endif">Ver Perfil</a>
+                  <a class="dropdown-item mt-2" onCLick="mudarsenha('{{ $user->id }}')">Mudar senha</a>
                 </div>
+
                @endif
             </div>    
 
@@ -210,7 +207,7 @@
 
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js""></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/js/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 

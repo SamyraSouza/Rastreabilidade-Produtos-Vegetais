@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Person;
 
 use App\Http\Controllers\Controller;
-use App\Models\Contact;
 use App\Http\Requests\ContactFormRequest;
 use Illuminate\Http\Request;
 use App\Notifications\NewContact;
+use App\Notifications\Forgot;
 
 use Illuminate\Support\Facades\Notification;
 
@@ -20,6 +20,8 @@ class PersonController extends Controller
     }
 
     public function check(Request $request){
+
+        $people = Person::WhereNull('permission')->get();
           
         $teste = Person::where([
             ['email', 'like', $request->email]
@@ -38,7 +40,7 @@ class PersonController extends Controller
 
             $request->session()->put('adm', true);
 
-            return view('/index');
+            return view('/index', ['people' => $people]);
         }
         
         elseif(isset($teste)){
@@ -49,7 +51,7 @@ class PersonController extends Controller
 
             $request->session()->put('email', $request->email);
 
-            return view('/index',['user' => $teste]);
+            return view('/index',['user' => $teste, 'people' => $people]);
 
         } else {
             return redirect('/')->with('msg', 'Email ou senha inválidos.');
@@ -174,11 +176,56 @@ class PersonController extends Controller
 
         $person->permission = 1;
 
+        $senha = rand(1000,100000);
+
+        $person->senha = $senha;
+        
         $person->update();
+
+        Notification::route('mail', $person->email)->notify(new NewContact($person)); 
+    
 
         toast('Pessoa permitida com sucesso!','success');
  
-         return redirect('/peoples');
+        return redirect('/peoples');
+     }
+
+     public function esqueceusenha($email){
+
+        $person = Person::where('email', $email)->first();
+
+        if($person == "" || $person->senha == ""){
+            return redirect('/')->with('msg', 'Email não está cadastrado. Faça uma conta!');
+        }
+
+        else{
+
+            $senha = rand(1000,100000);
+
+            $person->senha = $senha;
+            
+            $person->update();
+
+            Notification::route('mail', $person->email)->notify(new Forgot($person));
+
+            return redirect('/')->with('msg-su', 'Foi enviado um email para você com a nova senha!');
+        }
+     }
+     
+    public function senha($senha){
+
+        $email = session('email');
+
+        $person = Person::where('email', $email)->first();
+
+        $person->senha = $senha;
+
+        $person->update();
+
+        toast('Senha modificada com sucesso!','success');
+
+        return redirect('/profile/'.$person->id);
+
      }
 
      
@@ -237,6 +284,7 @@ class PersonController extends Controller
                 $data['imagem_aerea'] = $imagem_aereaName;;
             }
 
+        
         $person->update($data);
 
         toast('Usuário editado com sucesso!','success');

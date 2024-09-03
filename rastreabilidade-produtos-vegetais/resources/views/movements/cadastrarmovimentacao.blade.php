@@ -131,7 +131,7 @@
   
   
               <div class="d-flex justify-content-center">
-               <input type="submit" class="btn btn-success mt-3 mb-5 col-md-2 d-flex" value="Criar Movimentação"> 
+               <input type="submit" class="btn btn-success mt-3" value="Criar Movimentação"> 
               </div>
                 </div>
               </div>

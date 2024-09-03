@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Person;
 
-class NewContact extends Notification implements ShouldQueue
+class Forgot extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -39,9 +39,7 @@ class NewContact extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     { 
         return (new MailMessage)
-                    ->line('Seja Bem-Vindo!')
-                    ->line('Seu cadastro na TSN Logística foi permitido.')
-                    ->line('Para acessar sua conta, use a senha:')
+                    ->line('Sua nova senha é:')
                     ->line($this->person->senha);
     }
 
