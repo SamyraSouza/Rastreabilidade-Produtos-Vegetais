@@ -11,7 +11,7 @@ class AutenticacaoMiddleware
     {
 
         if (!$request->session()->has('autenticado')) {
-            return redirect('/')->with('msg', 'Você não está logado!');
+            return redirect('/login')->with('msg', 'Você não está logado!');
         }
 
         return $next($request);

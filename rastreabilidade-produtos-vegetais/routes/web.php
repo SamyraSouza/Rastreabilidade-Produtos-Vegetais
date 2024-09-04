@@ -9,14 +9,16 @@ use App\Http\Controllers\PersonController;
 use App\Http\Middleware\AutenticacaoMiddleware;
 
 // Mostrar Página Login
-Route::get('/', [PersonController::class, 'login']);
-
+Route::get('/login', [PersonController::class, 'login']);
 
 // Mostrar Página Cadastro
 Route::get('/cadastro', [PersonController::class, 'cadastro']);
 
 //autenticação
 Route::post('/sign', [PersonController::class, 'check']);
+
+//Checar email
+Route::get('/validar', [PersonController::class, 'email']);
 
 //sair
 Route::get('/sair', [PersonController::class, 'logout']);
@@ -26,6 +28,9 @@ Route::get('/index', [ProductController::class, 'index'])->middleware(Autenticac
 
 //Checar senha
 Route::get('/senha/{senha}', [PersonController::class, 'senha'])->middleware(AutenticacaoMiddleware::class);
+
+//excluir pessoa
+Route::get('/negar/{id}', [PersonController::class, 'negar'])->middleware(AutenticacaoMiddleware::class);
 
 //mudar imagem de fundo
 Route::put('/image/update/{id}', [PersonController::class, 'mudarimagem'])->middleware(AutenticacaoMiddleware::class);
@@ -99,7 +104,10 @@ Route::get('/batchs/ativar/{id}', [BatchController::class, 'ativar'])->middlewar
 Route::get('/batchs/ativarsobre/{id}', [BatchController::class, 'ativarsobre'])->middleware(AutenticacaoMiddleware::class);
 
 //rastrear Lote
-Route::get('/movements/rastrear', [MovementController::class, 'rastrear'])->middleware(AutenticacaoMiddleware::class);
+Route::get('/movements/rastrear', [MovementController::class, 'rastrear']);
+
+//rastrear Lote
+Route::get('/', [MovementController::class, 'lote']);
 
 ///////////////////////////  MOVIMENTAÇÃO /////////////////////////////////////////
 

@@ -187,26 +187,90 @@ public function rastrear(){
             $query->select('batches_id')->from('movements');
         })->where([ ['code', 'like', '%'.$search.'%']])->first();
 
+        $product = Product::WhereIn('id', function($query) {
+            $query->select('products_id')->from('batches');
+        })->first();
+        $producao = "";
+        $validade = "";
+
+
         if($batchs != ""){
-        $movements = Movement::where('batches_id', $batchs->id)->orderByDesc('created_at')->first();
-              
-        if($movements != ""){
-        $data = $movements->created_at;
-        
-        $data = date('d/m/Y H:i');
-        } 
+
+        $movements = Movement::where('batches_id', $batchs->id)->orderByDesc('created_at')->get();
+
+        $input = $batchs->dt_producao;
+        $date = strtotime($input);
+        $producao = date('d/m/Y', $date);
+
+        $vali = $batchs->dt_validade;
+        $val = strtotime($vali);
+        $validade = date('d/m/Y', $val);
+           
+
     } else{
         $movements = "";
-        $data = "";
+  
         toast('Não há lotes em movimentação com esse código','error');
     }
 
     }else{
         $batchs = "";
         $movements = "";
-        $data = "";
+        $product = "";
+        $producao = "";
+        $validade = "";
     }
-        return view('movements.rastrear', ['batchs'=> $batchs, 'movements' => $movements, 'data' => $data, 'user' => $teste, 'people' => $people]);
+
+        return view('movements.rastrear', ['batchs'=> $batchs, 'movements' => $movements, 'user' => $teste, 'people' => $people, 'producao' => $producao, 'validade' => $validade, 'product' => $product]);
+}
+
+public function lote(){
+
+   session()->put('autenti', false);
+
+    $search = request('search');
+
+    if($search){
+
+        $batchs = Batch::WhereIn('id', function($query) {
+            $query->select('batches_id')->from('movements');
+        })->where([ ['code', 'like', '%'.$search.'%']])->first();
+
+        $product = Product::WhereIn('id', function($query) {
+            $query->select('products_id')->from('batches');
+        })->first();
+        $producao = "";
+        $validade = "";
+
+
+        if($batchs != ""){
+
+        $movements = Movement::where('batches_id', $batchs->id)->orderByDesc('created_at')->get();
+
+        $input = $batchs->dt_producao;
+        $date = strtotime($input);
+        $producao = date('d/m/Y', $date);
+
+        $vali = $batchs->dt_validade;
+        $val = strtotime($vali);
+        $validade = date('d/m/Y', $val);
+           
+
+    } else{
+        $movements = "";
+  
+        toast('Não há lotes em movimentação com esse código','error');
+    }
+
+    }else{
+        $batchs = "";
+        $movements = "";
+        $product = "";
+        $producao = "";
+        $validade = "";
+    }
+
+        return view('movements.rastrearlote', ['batchs'=> $batchs, 'movements' => $movements, 'product' => $product, 'producao' => $producao, 'validade' => $validade]);
 }
 
 }

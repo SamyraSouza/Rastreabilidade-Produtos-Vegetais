@@ -86,6 +86,8 @@
                       <td class="align-middle text-center">       
 
                         <a class="marg text-xs text-success font-weight-bold" href="/permission/{{ $person->id }}">Permitir Acesso</a>
+
+                        <a class="marg text-xs text-danger font-weight-bold" href="/negar/{{ $person->id }}">Negar Acesso</a>
                                
                       </td>
                     </tr> 

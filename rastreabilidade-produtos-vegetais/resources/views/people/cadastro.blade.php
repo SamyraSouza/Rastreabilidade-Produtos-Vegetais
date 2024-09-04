@@ -8,14 +8,13 @@
   <link rel="icon" type="image/png" href="/img/logistica-verde.png">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js""></script>
-  <script src="/js/jquery-3.7.1.min.js"></script>
-  <script src="/js/script.js"></script>
+
   <title>
     TSN Logística - Cadastro
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
   <!-- Nucleo Icons -->
   <link href="/css/nucleo-icons.css" rel="stylesheet" />
   <link href="/css/nucleo-svg.css" rel="stylesheet" />
@@ -25,7 +24,7 @@
   
   <!-- CSS Files -->
   <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
@@ -67,7 +66,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="email" class="form-control-label">Email</label>
-                                <input required class="form-control" type="email" name="email" id="email" placeholder="Email">
+                                <input required class="form-control" type="email" name="email" id="emailcadas" placeholder="Email">
                               </div>
                             </div>
                         </div>
@@ -197,9 +196,10 @@
                               </div>
                             </div>
             
+                          <div id="bot">
                         <div class="d-flex justify-content-center">
                          <input type="submit" class="btn btn-dark mt-3 mb-5 col-md-2 d-flex" value="Cadastar"> 
-                        </div>
+                        </div></div>
                           </div>
                         </div>
                       </div>
@@ -213,7 +213,12 @@
   <!--   Core JS Files   -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="/js/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script src="/js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+
 
   <script>
     $('#telefone').mask('(00)00000-0000');
@@ -221,10 +226,7 @@
     $('#cnpj').mask('00. 000. 000/0000-00');
   </script>
 
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+ 
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -234,10 +236,7 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+
 </body>
 
 </html>

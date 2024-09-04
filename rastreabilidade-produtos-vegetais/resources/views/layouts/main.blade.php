@@ -47,11 +47,11 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
 
-   
+        @if(@session('autenti') != false)
           <a class="d-flex justify-content-center nav-link-text ms-1 mb-3 mt-3 link-nav" href="/index">
             Página Inicial
           </a>
-           
+          @endif
           <div class="d-flex link-nav justify-content-center nav-link-text ms-1 mb-3 mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 Produtos            
           </div>
@@ -103,12 +103,13 @@
             </div>
             <span class="nav-link-text ms-1">Meus Lotes</span>
           </a>
-
+          @if(@session('autenti') != false)
           <a class="nav-link link-nav" href="/movements/rastrear">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             </div>
             <span class="nav-link-text ms-1">Rastrear Lote</span>
           </a>
+          @endif
               </div>
             </div>            
 
@@ -139,7 +140,7 @@
           </a>
 
     </div>
- 
+    @if(@session('autenti') != false)
       @if(@session('adm') == true)
         <a class="nav-link link-nav" href="/peoples">
         <div class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center" style="margin-left: -80px;">            
@@ -148,7 +149,8 @@
         <span class="nav-link-text ms-1">Pessoas Não Cadastradas</span>
         @else
         <span class="nav-link-text ms-1">Pessoas Não Cadastradas <i class="fa fa-warning icon"></i></span>      
-        @endif              
+        @endif 
+      @endif             
       </a>
 
    @endif
@@ -173,25 +175,36 @@
         </nav>
          <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group" style="margin-right:30px;"> 
+            <div class="input-group" style="margin-right:30px;">  
+              @if(@session('autenti') != false)
                 @if(@session('adm') == false)            
                 <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none;">                     
-                  <img src="@if($user->imagem_perfil == "")/img/perfil.jpg @else /img/people/{{ $user->imagem_perfil }} @endif" alt="" width="50px" height="50px" style="border-radius: 90px;">               
+                  <img src=" @if(@session('autenti') != false)@if($user->imagem_perfil == "")/img/perfil.jpg @else /img/people/{{ $user->imagem_perfil }} @endif @endif" alt="" width="50px" height="50px" style="border-radius: 90px;">               
                 </button>
 
+               
                 <div class="dropdown-menu mt-5" aria-labelledby="dropdownMenuButton" style="margin-left: -130px;">
                   <p class="nav-link-text" style="margin-left: 20px; margin-top: 10px;">@if(isset($user)){{ $user->nome }}@endif</p>
                   <a class="dropdown-item" href="/profile/@if(isset($user)){{$user->id}}@endif">Ver Perfil</a>
-                  <a class="dropdown-item mt-2" onCLick="mudarsenha('{{ $user->id }}')">Mudar senha</a>
+                  <a style="cursor: pointer;" class="dropdown-item mt-2" onCLick="mudarsenha('{{ $user->id }}')">Mudar senha</a>
                 </div>
-
+            
                @endif
             </div>    
 
-            <div class="input-group">
+            <div class="input-group" style="width: 100px; ">
             <a href="/sair" class="nav-link text-white font-weight-bold px-0" style=" width: 60px;">
                 <span class="d-sm-inline d-none" style="color:rgb(255, 39, 39);">Sair <i class="fa fa-sign-out" aria-hidden="true"></i></span>
               </a>
+              @else
+              <a href="/login" class="nav-link text-white font-weight-bold px-0" style=" width: 100px;">
+                <span class="d-sm-inline d-none mr-3" style="color:rgb(255, 255, 255);width: 100px; "><i class="fa fa-user-circle" aria-hidden="true"></i>  Entrar</span>
+              </a>
+              <a href="/cadastro" class="nav-link text-white font-weight-bold px-0" style=" width: 100px;">
+                <span class="d-sm-inline d-none" style="color:rgb(255, 255, 255);width: 100px; "><i class="fa fa-user-o" aria-hidden="true"></i>  Cadastrar</span>
+              </a>
+              @endif
+
             </div>
           </div>        
         </div>

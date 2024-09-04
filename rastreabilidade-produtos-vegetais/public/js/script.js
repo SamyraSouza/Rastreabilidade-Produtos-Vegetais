@@ -170,7 +170,7 @@ function esqueceusenha(){
     },
     showCancelButton: true,
     cancelButtonText: "Cancelar",
-    confirmButtonText: "Checar",
+    confirmButtonText: "Mandar",
     showLoaderOnConfirm: true,
     preConfirm: async (email) => {
       try {
@@ -188,3 +188,34 @@ function esqueceusenha(){
     
 } 
 
+// validar email
+$('#emailcadas').blur(function (e) { 
+
+
+  e.preventDefault();
+
+  var u_email = $('#emailcadas').val();
+
+  $.ajax({ 
+      url: '/validar',
+      method: 'GET' ,
+      data: {email: u_email},
+      dataType:'json'
+
+  }).done(function(result){
+      if(result==1){
+          Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Este email já está cadastrado!",         
+            });
+
+      $('#bot').hide();
+        
+      }   
+      else{
+      $('#bot').show();
+  
+  }
+  });
+});

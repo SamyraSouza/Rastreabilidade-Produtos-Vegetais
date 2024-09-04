@@ -36,6 +36,8 @@ class PersonController extends Controller
         
         if($request->email == $adm->email && $request->senha == $adm->senha){
 
+            $request->session()->put('autenti', true);
+
             $request->session()->put('autenticado', true);
 
             $request->session()->put('adm', true);
@@ -44,6 +46,8 @@ class PersonController extends Controller
         }
         
         elseif(isset($teste)){
+
+            $request->session()->put('autenti', true);
 
             $request->session()->put('autenticado', true);
 
@@ -54,15 +58,26 @@ class PersonController extends Controller
             return view('/index',['user' => $teste, 'people' => $people]);
 
         } else {
-            return redirect('/')->with('msg', 'Email ou senha inválidos.');
+            return redirect('/login')->with('msg', 'Email ou senha inválidos.');
         }
+    }
+
+    public function negar($id){
+
+        Person::findOrFail($id)->delete();
+    
+        toast('Pessoa negada com sucesso!','success');
+    
+        return redirect('/peoples');
     }
 
     public function logout(Request $request){
 
-        $request->session()->forget('autenticado');      
+        $request->session()->forget('autenticado');  
+        
+        toast('Você foi deslogado com sucesso!','success');
 
-        return redirect('/')->with('msg-success', 'Você foi deslogado com sucesso!');
+        return redirect('/');
     }
 
     public function cadastro(){
@@ -159,7 +174,7 @@ class PersonController extends Controller
 
         $person->save();
 
-        return redirect('/')->with('msg-su', 'Cadastro feito com sucesso! Espere o email confimando o seu acesso.');
+        return redirect('/login')->with('msg-su', 'Cadastro feito com sucesso! Espere o email confimando o seu acesso.');
         
     }
 
@@ -168,6 +183,25 @@ class PersonController extends Controller
        $people = Person::WhereNull('permission')->get();
 
         return view('people.listarpessoa', ['people' => $people]);
+    }
+
+    public function email(){
+
+        $email = $_GET['email'];
+
+        header('Content-Type> application/json');
+
+        $people = Person::where('email', $email)->first();
+
+        if($people == ""){
+
+        echo json_encode(0);
+       
+        }
+        else{
+        echo json_encode(1);
+        
+     }
     }
 
     public function permission($id){
@@ -195,7 +229,7 @@ class PersonController extends Controller
         $person = Person::where('email', $email)->first();
 
         if($person == "" || $person->senha == ""){
-            return redirect('/')->with('msg', 'Email não está cadastrado. Faça uma conta!');
+            return redirect('/login')->with('msg', 'Email não está cadastrado. Faça uma conta!');
         }
 
         else{
@@ -208,7 +242,7 @@ class PersonController extends Controller
 
             Notification::route('mail', $person->email)->notify(new Forgot($person));
 
-            return redirect('/')->with('msg-su', 'Foi enviado um email para você com a nova senha!');
+            return redirect('/login')->with('msg-su', 'Foi enviado um email para você com a nova senha!');
         }
      }
      
