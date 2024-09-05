@@ -36,7 +36,7 @@
                 <div class="form-group">
                      <label class="mt-3" for="code">Código</label>
                      <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="code" id="code" placeholder="XXX-00000">
+                        <input type="text" class="form-control" name="code" id="codeproduct" placeholder="XXX-00000">
                         <button onCLick="aleatorio()" class="btn btn-secondary mb-0" type="button" id="button-addon2"><img src="/img/produto-de-codigo-de-barras.png"></button>
                     </div>
                 </div>
@@ -100,9 +100,11 @@
             </div>
             </div>
 
+            <div id="bot">
             <div class="d-flex justify-content-center">
              <input type="submit" class="btn btn-success mt-3 mb-5 col-md-2 d-flex" value="Criar Produto"> 
             </div>
+          </div>
               </div>
             </div>
           </div>

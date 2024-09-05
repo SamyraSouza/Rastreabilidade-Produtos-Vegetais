@@ -89,16 +89,32 @@ class BatchController extends Controller
         }
         else{
             $random = random_int(00000, 99999);
+            
+            $batch->code = "LOT-" . $random;
 
-            $batch->code = "PRD-" . $random;
-        }
+            $checar = Batch::where('code', $batch->code)->first();           
+           
+
+            while($checar != ""){
+
+                $random = random_int(00000, 99999);
+                
+                $batch->code = "LOT-" . $random;
+
+                $checar = Batch::where('code', $random)->first();
+                
+            }
+    }
 
         $batch->save();
 
         toast('Lote criado com sucesso!','success');
 
+        if(session('adm') == true){
+        return redirect('/batchs');
+        }else{
         return redirect('/batc');
-
+}
 }
 
 public function showbatchs(){
@@ -262,6 +278,25 @@ public function ativarsobre($id){
     toast('Lote ativado com sucesso!','success');
 
     return redirect('/batch/'.$id);
+}
+
+public function code(){
+
+    $code = $_GET['code'];
+
+    header('Content-Type> application/json');
+
+    $code = Batch::where('code', $code)->first();
+
+    if($code == ""){
+
+    echo json_encode("n");
+   
+    }
+    else{
+    echo json_encode($code->id);
+    
+ }
 }
 
 public function pdf($id){

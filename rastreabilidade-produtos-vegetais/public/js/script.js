@@ -3,12 +3,31 @@ function aleatorio(){
 
     var codigo = Math.floor(Math.random() * 99999) + 1;
 
-    console.log(codigo);
 
-    var aleatorio = document.querySelector('#code');
+    var aleatorio = document.querySelector('#codeproduct');
 
     aleatorio.value = "PRD-" + codigo;
 
+}
+
+function mostrar(){
+  var menu = document.getElementById('menu');
+  var mostrar = document.getElementById('mostrar');
+  var fechar = document.getElementById('fechar');
+
+  fechar.style.display = "block";
+  menu.style.display = "block";
+  mostrar.style.display = "none";
+}
+
+function fechar(){
+  var menu = document.getElementById('menu');
+  var mostrar = document.getElementById('mostrar');
+  var fechar = document.getElementById('fechar');
+
+  mostrar.style.display = "block";
+  menu.style.display = "none";
+  fechar.style.display = "none";
 }
 
 //fazer código aleatório lote
@@ -16,9 +35,7 @@ function aleatoriolote(){
 
     var codigo = Math.floor(Math.random() * 99999) + 1;
 
-    console.log(codigo);
-
-    var aleatorio = document.querySelector('#code');
+    var aleatorio = document.querySelector('#codebatch');
 
     aleatorio.value = "LOT-" + codigo;
 
@@ -219,3 +236,68 @@ $('#emailcadas').blur(function (e) {
   }
   });
 });
+
+// validar código produto
+$('#codeproduct').blur(function (e) { 
+
+  e.preventDefault();
+
+  var code = $('#codeproduct').val();
+
+  $.ajax({ 
+      url: '/validarproduto',
+      method: 'GET' ,
+      data: {code: code},
+      dataType:'json'
+
+  }).done(function(result){
+      if(result!="n"){
+          Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Este código já está cadastrado em outro produto!", 
+              html: `<a href="/products/`+result+`" autofocus>Ver Produto</a>`,          
+            });
+
+      $('#bot').hide();
+        
+      }   
+      else{
+      $('#bot').show();
+  
+  }
+  });
+});
+
+// validar código lote
+$('#codebatch').blur(function (e) { 
+
+  e.preventDefault();
+
+  var code = $('#codebatch').val();
+
+  $.ajax({ 
+      url: '/validarlote',
+      method: 'GET' ,
+      data: {code: code},
+      dataType:'json'
+
+  }).done(function(result){
+      if(result!="n"){
+          Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Este código já está cadastrado em outro lote!", 
+              html: `<a href="/batch/`+result+`" autofocus>Ver Lote</a>`,          
+            });
+
+      $('#bot').hide();
+        
+      }   
+      else{
+      $('#bot').show();
+  
+  }
+  });
+});
+

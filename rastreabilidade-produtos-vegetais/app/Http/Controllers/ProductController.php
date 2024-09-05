@@ -145,9 +145,25 @@ class ProductController extends Controller
             $product->code = $request->code;
         }
         else{
-            $random = random_int(00000, 99999);
 
+            $random = random_int(00000, 99999);
+            
             $product->code = "PRD-" . $random;
+
+            $checar = Product::where('code', $product->code)->first();           
+           
+
+            while($checar != ""){
+
+                $random = random_int(00000, 99999);
+                
+                $product->code = "PRD-" . $random;
+
+                $checar = Product::where('code', $random)->first();
+
+                
+            }
+
         }
 
         
@@ -169,8 +185,11 @@ class ProductController extends Controller
 
         toast('Produto criado com sucesso!','success');
 
-        return redirect('/produc');
-
+        if(session('adm') == true){
+            return redirect('/products');
+            }else{
+            return redirect('/produc');
+    }
     }
 
     public function showproduct($id){
@@ -311,6 +330,25 @@ class ProductController extends Controller
         toast('Produto ativado com sucesso!','success');
 
         return redirect('/products/'.$id);
+    }
+
+    public function code(){
+
+        $code = $_GET['code'];
+
+        header('Content-Type> application/json');
+
+        $code = Product::where('code', $code)->first();
+
+        if($code == ""){
+
+        echo json_encode("n");
+       
+        }
+        else{
+        echo json_encode($code->id);
+        
+     }
     }
 
     public function pdf($id){

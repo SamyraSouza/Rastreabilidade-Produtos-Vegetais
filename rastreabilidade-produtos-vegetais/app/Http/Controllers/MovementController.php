@@ -76,7 +76,12 @@ class MovementController extends Controller
 
         toast('Movimentação criada com sucesso!','success');
 
-        return redirect('/movem');
+        
+        if(session('adm') == true){
+            return redirect('/movements');
+            }else{
+            return redirect('/movem');
+    }
 
 }
 

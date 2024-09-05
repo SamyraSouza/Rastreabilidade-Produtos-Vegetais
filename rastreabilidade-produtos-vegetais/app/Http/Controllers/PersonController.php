@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Notification;
 
 class PersonController extends Controller
 {
+    public function inicial(){
+        return view('inicial');
+    }
+
     public function login(){
         return view('people.login');
     }
@@ -74,10 +78,8 @@ class PersonController extends Controller
     public function logout(Request $request){
 
         $request->session()->forget('autenticado');  
-        
-        toast('Você foi deslogado com sucesso!','success');
 
-        return redirect('/');
+        return redirect('/rastreio');
     }
 
     public function cadastro(){

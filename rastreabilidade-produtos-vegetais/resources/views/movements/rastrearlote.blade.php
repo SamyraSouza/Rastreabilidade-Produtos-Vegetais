@@ -22,7 +22,7 @@
      <div class="col-md-20 mt-3 mb-3">
        <label for="search"><h1>Digite o Código do Lote Aqui</h1></label>
        <div class="input-group mb-3">
-        <form class="d-flex justify-content-center wid mt-4" action="/" method="GET">
+        <form class="d-flex justify-content-center wid mt-4" action="/rastreio" method="GET">
         <input type="text" class="form-control" placeholder="Código do Lote" name="search" id="search" aria-describedby="button-addon2">
         <form>
         <button class="btn btn-outline-primary mb-0" type="submit" id="button-addon2">Rastrear</button>
@@ -45,14 +45,14 @@
         </thead>
 
         <tbody>
-          @foreach($movements as $movement)
+     
           <tr>
             <td class="text-center">{{ $product->name}} - {{ $product->code }}</td>
             <td class="text-center">{{ $batchs->code}}</td>
             <td class="text-center">{{ $producao}}</td>
             <td class="text-center">{{ $validade }}</td>
           </tr>
-          @endforeach
+
         </tbody>
    </table>
 

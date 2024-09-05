@@ -5,12 +5,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="/img/logistica-verde.png">
+  <link rel="icon" type="image/png" href="/img/logistica.png">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="/js/jquery-3.7.1.min.js"></script>
-  <script src="/js/script.js"></script>
+
   <title>
     TSN Logística - @yield('title')
   </title>
@@ -25,9 +23,7 @@
   
   <!-- CSS Files -->
   <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
 
@@ -37,8 +33,8 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0 d-flex justify-content-center align-middle" href="/index">
-        <img src="/img/logistica-verde.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold mt-2">TSN Logística</span>
+        <img src="/img/logistica.png" class="navbar-brand-img h-100" alt="main_logo">
+        <span class=" font-weight-bold mt-2" style="margin-left: 10px;">TSN Logística</span>
       </a>
     </div>
 
@@ -70,13 +66,14 @@
             </div>
             <span class="nav-link-text ms-1">Cadastrar Produto</span>
           </a>
-
-    
-              </div>      <a class="nav-link link-nav" href="/produc">
+          </div>
+          @if(@session('adm') != true)
+          <a class="nav-link link-nav" href="/produc">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             </div>
             <span class="nav-link-text ms-1">Meus Produtos</span>
           </a>
+          @endif
             </div>
 
    
@@ -97,12 +94,13 @@
             </div>
             <span class="nav-link-text ms-1">Cadastrar Lote</span>
           </a>
-
+          @if(@session('adm') != true)
           <a class="nav-link link-nav" href="/batc">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             </div>
             <span class="nav-link-text ms-1">Meus Lotes</span>
           </a>
+          @endif
           @if(@session('autenti') != false)
           <a class="nav-link link-nav" href="/movements/rastrear">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -132,12 +130,13 @@
             <span class="nav-link-text ms-1 link-nav na">Cadastrar Movimentação</span>
           </a>
 
-          
+          @if(@session('adm') != true)
           <a class="nav-link link-nav" href="/movem">
             <div class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center" style="margin-left: -60px;">
             </div>
             <span class="nav-link-text ms-1 link-nav na">Minhas Movimentações</span>
           </a>
+          @endif
 
     </div>
     @if(@session('autenti') != false)
@@ -175,27 +174,32 @@
         </nav>
          <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group" style="margin-right:30px;">  
+            <div class="input-group mt-2" style="margin-right:0px;">  
               @if(@session('autenti') != false)
                 @if(@session('adm') == false)            
-                <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none;">                     
+                <button type="button" onclick="mostrar()" id="mostrar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none;">                     
                   <img src=" @if(@session('autenti') != false)@if($user->imagem_perfil == "")/img/perfil.jpg @else /img/people/{{ $user->imagem_perfil }} @endif @endif" alt="" width="50px" height="50px" style="border-radius: 90px;">               
                 </button>
 
+                <button type="button" onclick="fechar()" id="fechar"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none; display:none;">                     
+                  <img src=" @if(@session('autenti') != false)@if($user->imagem_perfil == "")/img/perfil.jpg @else /img/people/{{ $user->imagem_perfil }} @endif @endif" alt="" width="50px" height="50px" style="border-radius: 90px;">               
+                </button>
                
-                <div class="dropdown-menu mt-5" aria-labelledby="dropdownMenuButton" style="margin-left: -130px;">
+                <div class="dropdown-menu mt-5" aria-labelledby="dropdownMenuButton" id="menu" style="margin-left: -130px;">
                   <p class="nav-link-text" style="margin-left: 20px; margin-top: 10px;">@if(isset($user)){{ $user->nome }}@endif</p>
                   <a class="dropdown-item" href="/profile/@if(isset($user)){{$user->id}}@endif">Ver Perfil</a>
                   <a style="cursor: pointer;" class="dropdown-item mt-2" onCLick="mudarsenha('{{ $user->id }}')">Mudar senha</a>
+                  <a class="dropdown-item mt-2" href="/sair">Sair <i class="fa fa-sign-out" aria-hidden="true"></i></a>
                 </div>
-            
-               @endif
+                        
             </div>    
 
+            @else
             <div class="input-group" style="width: 100px; ">
             <a href="/sair" class="nav-link text-white font-weight-bold px-0" style=" width: 60px;">
                 <span class="d-sm-inline d-none" style="color:rgb(255, 39, 39);">Sair <i class="fa fa-sign-out" aria-hidden="true"></i></span>
               </a>
+              @endif
               @else
               <a href="/login" class="nav-link text-white font-weight-bold px-0" style=" width: 100px;">
                 <span class="d-sm-inline d-none mr-3" style="color:rgb(255, 255, 255);width: 100px; "><i class="fa fa-user-circle" aria-hidden="true"></i>  Entrar</span>
@@ -215,40 +219,42 @@
 
 @yield('content')
 
-
-
-
 </body>
-
+<!-- Remover duplicados e manter a versão mais recente -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="/js/jquery-3.7.1.min.js"></script>
+
+<!-- Select2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+<!-- Select2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<!-- Outros scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
+
+<!-- Scripts locais -->
+<script src="/js/script.js"></script>
 
 <script>
   $('#telefone').mask('(00)00000-0000');
   $('#cpf').mask('000.000.000-00');
-  $('#cnpj').mask('00. 000. 000/0000-00');
+  $('#cnpj').mask('00.000.000/0000-00');
 </script>
+
 <!-- Core -->
 <script src="/js/core/popper.min.js"></script>
-
 <script src="/js/core/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js" integrity="sha512-MpDFIChbcXl2QgipQrt1VcPHMldRILetapBl5MPCA9Y8r7qvlwx1/Mc9hNTzY+kS5kX6PdoDq41ws1HiVNLdZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @include('sweetalert::alert')
+
 <!-- Theme JS -->
 <script src="/js/argon-dashboard.min.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-
-<script src="/js/script.js"></script>
+<!-- Removido jQuery duplicado (versão 3.3.1) -->
 
 </html>

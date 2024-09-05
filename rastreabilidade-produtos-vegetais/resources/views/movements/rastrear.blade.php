@@ -44,14 +44,14 @@
        </thead>
 
        <tbody>
-         @foreach($movements as $movement)
+      
          <tr>
            <td class="text-center">{{ $product->name}} - {{ $product->code }}</td>
            <td class="text-center">{{ $batchs->code}}</td>
            <td class="text-center">{{ $producao}}</td>
            <td class="text-center">{{ $validade }}</td>
          </tr>
-         @endforeach
+
        </tbody>
   </table>
 
