@@ -47,7 +47,6 @@
         </div>
     </nav>
 
-
     <div class="section section-header">
         <div class="parallax filter filter-color-grey">
             <div class="image"
@@ -213,7 +212,6 @@
                     </a>
                 </li>
             </ul>
-
 
             <div class="tab-content">
                 <div class="tab-pane active" id="testimonial1">

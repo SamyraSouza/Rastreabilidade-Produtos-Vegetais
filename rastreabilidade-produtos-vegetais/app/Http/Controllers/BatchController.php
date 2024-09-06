@@ -13,6 +13,11 @@ use App\Models\Person;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
+use Illuminate\Support\Facades\Storage;
+
 class BatchController extends Controller
 {
 
@@ -108,7 +113,9 @@ class BatchController extends Controller
 
         $batch->save();
 
+
         toast('Lote criado com sucesso!','success');
+
 
         if(session('adm') == true){
         return redirect('/batchs');
@@ -116,6 +123,7 @@ class BatchController extends Controller
         return redirect('/batc');
 }
 }
+
 
 public function showbatchs(){
 
@@ -304,7 +312,11 @@ public function pdf($id){
     $batch = Batch::findOrFail($id);
 
     $pessoa = Person::select('*')->where('id', $batch->people_id)->first();
-    
+
+  
+    $qrcode = QrCode::size(200)->generate('127.0.0.1:800/rastreio?search='.$batch->code);
+        
+
     $data =[
         [
             'code' => $batch->code,
@@ -313,7 +325,7 @@ public function pdf($id){
             'producao_ecologica' => $batch->producao_ecologica,
             'producao_sustentavel' => $batch->producao_sustentavel,
             'status' => $batch->status,
-            'cnpj' => $pessoa->cnpj
+            'cnpj' => $pessoa->cnpj,
         ]
     ];
 

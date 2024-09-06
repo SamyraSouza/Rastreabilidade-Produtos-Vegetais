@@ -25,9 +25,6 @@
     }
 </style>
 
-<script>
-    
-</script>
     
 @foreach($data as $product)
 

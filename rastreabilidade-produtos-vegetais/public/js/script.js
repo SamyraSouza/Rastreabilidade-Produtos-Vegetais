@@ -301,3 +301,14 @@ $('#codebatch').blur(function (e) {
   });
 });
 
+function saveAsPNG() {
+
+  var element =  document.getElementById('qrcode');
+
+  html2canvas(element).then(function(canvas) {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL("/img");
+    link.download = 'qrcode.png';
+    link.click();
+  });
+}

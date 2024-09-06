@@ -25,7 +25,7 @@
             <div id="image-container" class="col-md-6">
 
                 <div id="img-container">
-                    <img src="/img/products/{{$product->image}}" class="img-fluid" alt="{{$product->name}}">
+                    <img id="image" src="/img/products/{{$product->image}}" class="img-fluid" alt="{{$product->name}}">
                 </div>
 
             </div>
@@ -98,7 +98,7 @@
 
       
 
-
+            
         </div>
     </div> 
 </div>

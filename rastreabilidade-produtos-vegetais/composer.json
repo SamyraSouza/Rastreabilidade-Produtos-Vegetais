@@ -7,9 +7,12 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.0",
+        "calcinai/php-imagick": "^0.1.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "realrashid/sweet-alert": "^7.2"
+        "realrashid/sweet-alert": "^7.2",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "werneckbh/laravel-qr-code": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

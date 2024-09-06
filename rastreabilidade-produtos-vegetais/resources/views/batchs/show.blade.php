@@ -24,14 +24,14 @@
         <div class="row mb-6">
             <div id="image-container" class="col-md-6">
 
-                <div id="img-container">
-                    <img src="/img/products/{{$product->image}}" class="img-fluid" alt="{{$product->name}}">
+                <div id="img-container" style="width: 400px; height: 400px; displya:flex; justify-content: center;">
+                    <div id="qrcode" class="mt-5 img-fluid"></div>
                 </div>
 
             </div>
 
             <div id="info-container" class="col-md-6">
-                <h1 class="lotes-title mb-5">{{$batch->code}}</h1>
+                <h1 class="lotes-title mb-5" id="codigo">{{$batch->code}}</h1>
 
                 <p class="product-name"><span class="sobre">  Produto:</span> {{$product->name}}</p>
 
@@ -95,9 +95,31 @@
                     @endif
                         @endif
                          <a href="/batchs/pdf/{{$batch->id}}" class="marg text-secondary font-weight-bold text-center">Gerar PDF</a>
-
+                         <button><a href="/qrcode">QRCode</a></button>
                       </td>
 
+                </div>
+                <div>
+
+                    <script src="/js/qrcode.js"></script>
+                    <script src="/js/qrcode.min.js"></script>
+                    <script>
+
+                        var codigo = document.getElementById('codigo').innerText;
+
+                        var qrcode = new QRCode("test", {
+                        text: '127.0.0.1:800/rastreio?search='+codigo,
+                        width: 400,
+                        height: 400,
+                        colorDark : "#000000",
+                        colorLight : "#ffffff",
+                        correctLevel : QRCode.CorrectLevel.H
+                    });
+                    </script>
+                    <script type="text/javascript">
+                    new QRCode(document.getElementById("qrcode"), '127.0.0.1:800/rastreio?search='+codigo);
+
+                </script>
                 </div>
             </div>
         </div>

@@ -7,6 +7,11 @@ use App\Http\Controllers\BatchController;
 use App\Http\Controllers\MovementController;
 use App\Http\Controllers\PersonController;
 use App\Http\Middleware\AutenticacaoMiddleware;
+use App\Http\Controllers\QrCodeController;
+
+//gerar qrCode
+Route::get('/qrcode', [QRCodeController::class, 'show']);
+
 
 // Mostrar Página Login
 Route::get('/login', [PersonController::class, 'login']);

@@ -1,0 +1,5 @@
+{
+    "require": {
+        "werneckbh/laravel-qr-code": "^0.1.3"
+    }
+}
