@@ -29,12 +29,12 @@
 
     <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 back position-absolute w-100"></div>
-  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="lado">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0 d-flex justify-content-center align-middle" href="/index">
         <img src="/img/logistica.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class=" font-weight-bold mt-2" style="margin-left: 10px;">TSN Logística</span>
+        <span class=" font-weight-bold mt-2" style="margin-left: 10px;">TSN Logística <img src="img/marca-cruzada.png" width="10px" height="10px" style="margin-left: 10px;" id="fecho" alt="" onclick="close()"></span>
       </a>
     </div>
 
@@ -172,12 +172,13 @@
           </ol>
           <h6 class="font-weight-bolder text-white mb-0">@yield('page')</h6>
         </nav>
-         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+         <div class="mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group mt-2" style="margin-right:0px;">  
+
               @if(@session('autenti') != false)
                 @if(@session('adm') == false)            
-                <button type="button" onclick="mostrar()" id="mostrar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none;">                     
+                <button type="button" onclick="mostrar()"  id="mostrar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none;">                     
                   <img src=" @if(@session('autenti') != false)@if($user->imagem_perfil == "")/img/perfil.jpg @else /img/people/{{ $user->imagem_perfil }} @endif @endif" alt="" width="50px" height="50px" style="border-radius: 90px;">               
                 </button>
 
@@ -208,6 +209,17 @@
                 <span class="d-sm-inline d-none" style="color:rgb(255, 255, 255);width: 100px; "><i class="fa fa-user-o" aria-hidden="true"></i>  Cadastrar</span>
               </a>
               @endif
+
+              
+              <li class="nav-item d-xl-none ps-3 d-flex align-items-center" id="menu" onclick="abrir()">
+                <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                  <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line bg-white"></i>
+                    <i class="sidenav-toggler-line bg-white"></i>
+                    <i class="sidenav-toggler-line bg-white"></i>
+                  </div>
+                </a>
+              </li>
 
             </div>
           </div>        
@@ -255,7 +267,5 @@
 <script src="/js/argon-dashboard.min.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-<!-- Removido jQuery duplicado (versão 3.3.1) -->
 
 </html>

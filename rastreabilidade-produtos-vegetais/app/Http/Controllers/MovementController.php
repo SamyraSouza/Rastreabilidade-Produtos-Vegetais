@@ -157,12 +157,15 @@ public function pdf($id){
 
     $movement = Movement::findOrFail($id);
 
+    $batch= Batch::findOrFail($movement->batches_id);
+
     $data =[
         [
             'nome' => $movement->nome,
             'razao_social' => $movement->razao_social,
             'documento' => $movement->documento,
             'endereco' => $movement->endereco,
+            'qrcode' => $batch->qrcode,
             'tipo_documento' => $movement->tipo_documento,
             'tipo_movimentacao' => $movement->tipo_movimentacao,
             'tipo_endereco' => $movement->tipo_endereco,

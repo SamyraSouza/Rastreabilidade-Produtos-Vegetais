@@ -18,6 +18,8 @@ function mostrar(){
   fechar.style.display = "block";
   menu.style.display = "block";
   mostrar.style.display = "none";
+
+  console.log(menu.style);
 }
 
 function fechar(){
@@ -312,3 +314,21 @@ function saveAsPNG() {
     link.click();
   });
 }
+
+
+function abrir(){
+  var lado = document.getElementById('lado');
+
+
+  lado.style.display = "block"
+
+}
+
+function close(){
+
+  var lado = document.getElementById('lado');
+
+  lado.style.display = "none"
+
+}
+

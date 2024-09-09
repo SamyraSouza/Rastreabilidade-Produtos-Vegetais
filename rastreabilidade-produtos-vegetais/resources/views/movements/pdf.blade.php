@@ -36,7 +36,7 @@
                 <td class="d-flex justify-content-center"><span class="image"><img src="{{ public_path('img/logistica-verde.png') }}" alt="logo" class="imagem-table"></span></td>
                 
                 <td><span class="linha">Nome: {{$movement['nome']}}</span></td>
-                <td><span class="linha">Razão Social: {{$movement['razao_social']}}</span></td>
+                <td><span class="linha"> <img src="{{ public_path('storage/'.$movement['qrcode']) }}" alt="QR Code" class="imagem-table"></span></td>
                 
                 <tr>  
                 <td>{{$movement['tipo_documento']}}: {{$movement['documento']}}</td> 

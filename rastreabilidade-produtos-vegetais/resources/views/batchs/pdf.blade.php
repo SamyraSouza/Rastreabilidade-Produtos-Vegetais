@@ -32,12 +32,15 @@
 <table class="table">       
                 <tr>
                 <td class="d-flex justify-content-center">
-                   <img src="{{ public_path('img/logistica-verde.png') }}" alt="logo" class="imagem-table"></span>
+                    <span class="image"><img src="{{ public_path('img/logistica-verde.png') }}" alt="logo" class="imagem-table"></span>
                 </td>
                 
                 <th>Código: {{$batch['code']}}</th> 
-                <td><span class="linha">Status: @if($batch['status'] == 0) Inativo @else Ativo @endif</span></td>
-                
+               
+                <td class="d-flex justify-content-center">
+                    <img src="{{ public_path('storage/'.$batch['qrcode']) }}" alt="QR Code" class="imagem-table"></span>
+                 </td>
+
                 <tr>  
                 <td><span class="linha">Produção ecológica: @if($batch['producao_ecologica'] == 0) Não @else Sim @endif </span></td>
                 <td>Produção Sustentável: @if($batch['producao_sustentavel'] == 0) Não @else Sim @endif</td>
@@ -50,7 +53,10 @@
                 </tr>
 
                 <tr> 
-                <td colspan="3">Cnpj Produtor: {{$batch['cnpj']}}</td>                             
+                <td colspan="2">Cnpj Produtor: {{$batch['cnpj']}}</td> 
+                
+                <td><span class="linha">Status: @if($batch['status'] == 0) Inativo @else Ativo @endif</span></td>
+                
                 </tr>
  
             </table>

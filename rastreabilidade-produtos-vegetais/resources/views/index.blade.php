@@ -12,7 +12,7 @@
             <div class="card-header pb-0 pt-3 bg-transparent">
               <h1 class="text-capitalize">Seja Bem-Vindo!</h1>    
             </div>
-            <p class="justify mt-3">O TSN Logística se responsabiliza pela aplicação da rastreabilidade ao longo da cadeia produtiva de produtos vegetais frescos destinados à alimentação humana.</p>
+            <p class="justify text-center mt-3" style="width:80%">O TSN Logística se responsabiliza pela aplicação da rastreabilidade ao longo da cadeia produtiva de produtos vegetais frescos destinados à alimentação humana.</p>
           </div>
         </div>
     </div>

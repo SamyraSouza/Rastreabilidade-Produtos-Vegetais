@@ -90,3 +90,20 @@
 .saber{
     margin-top: -20;
 }
+
+
+    #fecho{
+        display: none;
+    }
+
+
+@media (max-width: 1200px) {
+    #lado{
+        display: none;
+        z-index: 999;
+        transition: all 0.2s ease-in-out;
+    }
+    #fecho{
+        display: inline;
+    }
+}

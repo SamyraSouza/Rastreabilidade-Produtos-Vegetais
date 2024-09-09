@@ -15,15 +15,15 @@
     </div>
 @endif
 
-      <div class="row" style="display: flex; width:1500px; margin-left:50px;">
+      <div class="row mb-4" style="display: flex; width:100%;">
           <div class="card mb-4" style=" width:100%;">
             <div class="card-header pb-4">
 
      <div class="col-md-20 mt-3 mb-3">
        <label for="search"><h1>Digite o Código do Lote Aqui</h1></label>
        <div class="input-group mb-3">
-        <form class="d-flex justify-content-center wid mt-4" action="/rastreio" method="GET">
-        <input type="text" class="form-control" placeholder="Código do Lote" name="search" id="search" aria-describedby="button-addon2">
+        <form class="d-flex justify-content-center mt-4" action="/rastreio" method="GET">
+        <input style=" width:100%;" type="text" class="form-control" placeholder="Código do Lote" name="search" id="search" aria-describedby="button-addon2">
         <form>
         <button class="btn btn-outline-primary mb-0" type="submit" id="button-addon2">Rastrear</button>
       </div>
@@ -31,6 +31,8 @@
        <hr style="border: 1px solid rgb(126, 126, 126)">
 
        @if($batchs !="")
+       <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-0">
        <table class="table align-items-center mb-0">
         <thead>
           <tr>
@@ -87,7 +89,8 @@
           @endforeach
         </tbody>
     </table>
-
+  </div>
+  </div>
        
        @endif
        

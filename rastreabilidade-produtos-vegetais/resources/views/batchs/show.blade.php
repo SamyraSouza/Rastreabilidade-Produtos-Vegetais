@@ -25,7 +25,9 @@
             <div id="image-container" class="col-md-6">
 
                 <div id="img-container" style="width: 400px; height: 400px; displya:flex; justify-content: center;">
-                    <div id="qrcode" class="mt-5 img-fluid"></div>
+
+                <img src="{{ asset('storage/'.$batch->qrcode) }}" alt="QR Code">
+                
                 </div>
 
             </div>
@@ -95,7 +97,6 @@
                     @endif
                         @endif
                          <a href="/batchs/pdf/{{$batch->id}}" class="marg text-secondary font-weight-bold text-center">Gerar PDF</a>
-                         <button><a href="/qrcode">QRCode</a></button>
                       </td>
 
                 </div>

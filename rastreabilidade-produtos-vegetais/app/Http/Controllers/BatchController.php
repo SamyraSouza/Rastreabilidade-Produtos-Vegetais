@@ -78,6 +78,8 @@ class BatchController extends Controller
             $query->select('people_id')->from('products');
         })->first();
 
+
+
         $batch = new Batch;
 
         $batch->status = $request->status;
@@ -111,8 +113,15 @@ class BatchController extends Controller
             }
     }
 
-        $batch->save();
+            $qrcode = QrCode::format('svg')->size(200)->generate('127.0.0.1:8000/rastreio?search='.$batch->code);
 
+            $filePath = 'img/'.$batch->code.'.svg';
+
+            Storage::disk('public')->put($filePath, $qrcode);
+            
+            $batch->qrcode = $filePath;
+
+        $batch->save();
 
         toast('Lote criado com sucesso!','success');
 
@@ -326,6 +335,7 @@ public function pdf($id){
             'producao_sustentavel' => $batch->producao_sustentavel,
             'status' => $batch->status,
             'cnpj' => $pessoa->cnpj,
+            'qrcode' => $batch->qrcode
         ]
     ];
 
