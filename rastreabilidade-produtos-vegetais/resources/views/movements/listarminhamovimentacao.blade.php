@@ -12,13 +12,13 @@
 
   <div class="container-fluid py-4 mt-7">
     @if(session('msg'))
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success" role="alert" style="z-index:0;">
        <span class="light">{{session('msg')}}</span> 
     </div>
       @endif
     
       @if(count($movements)==0)
-      <div class="alert alert-danger mt-6" role="alert">
+      <div class="alert alert-danger mt-6" role="alert" style="z-index:0;">
         <div class="light">Não há movimentações disponíveis.</div>
       </div>
       @else

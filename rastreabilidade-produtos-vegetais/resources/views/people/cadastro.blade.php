@@ -169,7 +169,7 @@
                                         <option value="Empresário">Empresário</option>
                                     </select>    
                                     
-                                  <div class="col-md-6">
+                                  <div class="col-md-6" id="imgs">
                                   <div class="form-group">
                                     <label for="mapa" class="form-control-label marg mt-3">Mapa</label>
                                     <input type="file" name="mapa" id="mapa" class="form-control-file marg">

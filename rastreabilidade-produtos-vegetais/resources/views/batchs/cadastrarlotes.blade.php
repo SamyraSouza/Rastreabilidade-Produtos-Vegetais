@@ -35,7 +35,7 @@
                 <div class="col-md-6">
                      <label for="products_id">Selecione o Produto:</label>
                   <div class="form-group">
-            <select required name="products_id" id="products_id"  class="js-example-basic-single" style="width:350px;">
+            <select required name="products_id" id="products_id"  class="js-example-basic-single" style="width:300px;">
             <option value="">Selecione</option>     
 
             @foreach($products as $product)  

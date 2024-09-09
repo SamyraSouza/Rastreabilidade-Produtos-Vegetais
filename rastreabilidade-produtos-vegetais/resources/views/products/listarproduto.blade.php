@@ -18,7 +18,7 @@
 
 <div class="container-fluid py-4 mt-7">
 @if(session('msg'))
-<div class="alert alert-success" role="alert">
+<div class="alert alert-success" role="alert" style="z-index:0;">
    <span class="light">{{session('msg')}}</span> 
 </div>
   @endif
@@ -27,13 +27,13 @@
 
   @if(count($products)==0 && $search)
 
-  <div class="alert alert-danger" role="alert"><div class="light">
+  <div class="alert alert-danger" role="alert"><div class="light" style="z-index:0;">
   Não foi possível encontrar nenhum produto no nome ou código de: {{$search}}. Veja os produtos diponíveis <a class="forte" href="/products">Aqui</a></div>
 </div>
 
   @elseif(count($products)==0)
 
-<div class="alert alert-danger" role="alert">
+<div class="alert alert-danger" role="alert" style="z-index:0;">
   <div class="light">Não há produtos disponíveis.</div>
 </div>
  

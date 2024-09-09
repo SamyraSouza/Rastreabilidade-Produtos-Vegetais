@@ -12,24 +12,24 @@ function aleatorio(){
 
 function mostrar(){
   var menu = document.getElementById('menu');
-  var mostrar = document.getElementById('mostrar');
-  var fechar = document.getElementById('fechar');
+  
+  if (menu.style.display === "none" || menu.style.display === "") {
+    menu.style.display = "block"; 
+  } else {
+    menu.style.display = "none"; 
+  }
 
-  fechar.style.display = "block";
-  menu.style.display = "block";
-  mostrar.style.display = "none";
-
-  console.log(menu.style);
 }
 
-function fechar(){
-  var menu = document.getElementById('menu');
-  var mostrar = document.getElementById('mostrar');
-  var fechar = document.getElementById('fechar');
+function cadastro(){
+  var entrar = document.getElementById('entrar');
+  
+  if (entrar.style.display === "none" || entrar.style.display === "") {
+    entrar.style.display = "block"; 
+  } else {
+    entrar.style.display = "none"; 
+  }
 
-  mostrar.style.display = "block";
-  menu.style.display = "none";
-  fechar.style.display = "none";
 }
 
 //fazer código aleatório lote
@@ -319,16 +319,12 @@ function saveAsPNG() {
 function abrir(){
   var lado = document.getElementById('lado');
 
-
-  lado.style.display = "block"
-
-}
-
-function close(){
-
-  var lado = document.getElementById('lado');
-
-  lado.style.display = "none"
+  if (lado.style.display === "none" || lado.style.display === "") {
+    lado.style.display = "block"; 
+  } else {
+    lado.style.display = "none"; 
+  }
 
 }
+
 

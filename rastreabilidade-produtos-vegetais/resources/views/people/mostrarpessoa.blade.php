@@ -190,7 +190,7 @@
             </div>
           </div>
         </form>
-      <div class="col-md-4">
+      <div class="col-md-4" id="cd">
         <div class="card card-profile">
           <img src=" @if($user->imagem_fundo == "") /img/fundo.png @else /img/perfil/{{ $user->imagem_fundo }}@endif" alt="Image placeholder" class="card-img-top" style="height: 400px;">
           <a class="marg text-bold" style="font-weight: 800;" id="editar" style="margin-top: -25px;" onCLick="mudarimagem()"><i class="fa fa-edit" style="cursor: pointer;"></i><a> 

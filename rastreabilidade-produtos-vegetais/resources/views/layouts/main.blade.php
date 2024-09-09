@@ -35,7 +35,7 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0 d-flex justify-content-center align-middle" href="/index">
         <img src="/img/logistica.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class=" font-weight-bold mt-2" style="margin-left: 10px;">TSN Logística <img src="img/marca-cruzada.png" width="10px" height="10px" style="margin-left: 10px;" id="fecho" alt="" onclick="close()"></span>
+        <span class=" font-weight-bold mt-2" style="margin-left: 10px;">TSN Logística</span>
       </a>
     </div>
 
@@ -155,7 +155,9 @@
         @endif 
       @endif             
       </a>
-
+      <a href="/sair" class="nav-link text-white font-weight-bold px-0" style=" width: 60px;">
+        <span style="color:rgb(255, 39, 39);display:none; text-align:center; margin-left:18px" id="sair">Sair <i class="fa fa-sign-out" aria-hidden="true"></i></span>
+      </a>
    @endif
  </div>
   </div>
@@ -173,20 +175,29 @@
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Página</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">@yield('page')</li>
+            @if(@session('autenticado') != true)
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center" id="cadastro" onclick="cadatro()">
+              <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line bg-white"></i>
+                  <i class="sidenav-toggler-line bg-white"></i>
+                  <i class="sidenav-toggler-line bg-white"></i>
+                </div>
+              </a>
+            </li>
+            @endif
           </ol>
           <h6 class="font-weight-bolder text-white mb-0">@yield('page')</h6>
         </nav>
          <div class="mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            
             <div class="input-group mt-2" style="margin-right:0px;">  
 
               @if(@session('autenti') != false)
                 @if(@session('adm') == false)            
                 <button type="button" onclick="mostrar()"  id="mostrar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none;">                     
-                  <img src=" @if(@session('autenti') != false)@if($user->imagem_perfil == "")/img/perfil.jpg @else /img/people/{{ $user->imagem_perfil }} @endif @endif" alt="" width="50px" height="50px" style="border-radius: 90px;">               
-                </button>
-
-                <button type="button" onclick="fechar()" id="fechar"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:none; background:none; display:none;">                     
                   <img src=" @if(@session('autenti') != false)@if($user->imagem_perfil == "")/img/perfil.jpg @else /img/people/{{ $user->imagem_perfil }} @endif @endif" alt="" width="50px" height="50px" style="border-radius: 90px;">               
                 </button>
                
@@ -214,7 +225,7 @@
               </a>
               @endif
 
-              
+              @if(session('autenticado') == true)
               <li class="nav-item d-xl-none ps-3 d-flex align-items-center" id="menu" onclick="abrir()">
                 <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                   <div class="sidenav-toggler-inner">
@@ -224,7 +235,9 @@
                   </div>
                 </a>
               </li>
+              @endif
 
+             
             </div>
           </div>        
         </div>

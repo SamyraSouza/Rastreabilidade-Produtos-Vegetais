@@ -27,20 +27,20 @@
 
   @if(count($products)==0 && $search)
 
-  <div class="alert alert-danger" role="alert"><div class="light">
+  <div class="alert alert-danger" role="alert"><div class="light" style="z-index:0;">
   Não foi possível encontrar nenhum produto no nome ou código de: {{$search}}. Veja os produtos diponíveis <a class="forte" href="/produc">Aqui</a></div>
 </div>
 
   @elseif(count($products)==0)
 
-<div class="alert alert-danger" role="alert">
+<div class="alert alert-danger" role="alert" style="z-index:0;">
   <div class="light">Não há produtos disponíveis.</div>
 </div>
  
 @else
 
 @if(count($products)!=0 && $search)
-<div class="alert alert-light" role="alert">
+<div class="alert alert-light" role="alert" style="z-index:0;">
    <span>Buscando por: {{$search}}</span> 
 </div>
 @endif

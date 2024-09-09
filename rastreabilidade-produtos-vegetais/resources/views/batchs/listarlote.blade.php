@@ -27,20 +27,20 @@
 
   @if(count($batchs)==0 && $search)
 
-  <div class="alert alert-danger" role="alert"><div class="light">
+  <div class="alert alert-danger" role="alert" style="z-index:0;"><div class="light">
   Não foi possível encontrar nenhum lote no código de: {{$search}}. Veja os lotes diponíveis <a class="forte" href="/batchs">Aqui</a></div>
 </div>
 
   @elseif(count($batchs)==0)
 
-<div class="alert alert-danger" role="alert">
+<div class="alert alert-danger" role="alert" style="z-index:0;">
   <div class="light">Não há lotes disponíveis.</div>
 </div>
  
 @else
 
 @if(count($batchs)!=0 && $search)
-<div class="alert alert-light" role="alert">
+<div class="alert alert-light" role="alert" style="z-index:0;">
    <span>Buscando por: {{$search}}</span> 
 </div>
 @endif

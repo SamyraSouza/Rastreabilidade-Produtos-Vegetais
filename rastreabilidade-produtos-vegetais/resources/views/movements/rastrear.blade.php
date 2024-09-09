@@ -20,7 +20,7 @@
     <div class="card-header pb-4">
 
 <div class="col-md-20 mt-3 mb-3">
-<label for="search"><h1>Digite o Código do Lote Aqui</h1></label>
+<label for="search"><h1>Código do Lote</h1></label>
 <div class="input-group mb-3">
 <form class="d-flex justify-content-center mt-4" action="/rastreio" method="GET">
 <input style=" width:100%;" type="text" class="form-control" placeholder="Código do Lote" name="search" id="search" aria-describedby="button-addon2">

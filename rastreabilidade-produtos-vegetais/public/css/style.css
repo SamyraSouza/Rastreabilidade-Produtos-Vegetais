@@ -103,6 +103,10 @@
     justify-content: center;
 }
 
+#cadastro{
+    display: none;
+}
+
 @media (max-width: 1200px) {
     #lado{
         display: none;
@@ -111,5 +115,45 @@
     }
     #fecho{
         display: inline;
+    }
+    #sair{
+        display: block !important;
+        width: 100%;
+        margin-left: 0;
+    }
+    #imagem_aerea{
+        width: 200px;
+        margin-left: 0;
+    }
+    #imagem_perfil{
+        width: 200px;
+        margin-left: 0;
+    }
+    #mapa{
+        width: 200px;
+        margin-left: 0;
+    }
+    .form-group{
+        margin-left: 0;
+    }
+    #cd{
+        margin-top: 50px;
+    }
+    .marg{
+        margin-left: 0;
+
+    }
+    #imgs{
+        margin-top: 20px;
+    }
+    #cadastro{
+        display: block;
+        margin-left: 120%;
+    }
+    #rastreio{
+        width: 100% !important;
+    }
+    .cont{
+        width: 100%;
     }
 }

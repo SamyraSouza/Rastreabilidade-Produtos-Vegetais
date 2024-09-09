@@ -2,7 +2,7 @@
 
 @section('title', 'Editando')
 
-@section('page', 'Editar Movimentação')
+@section('page', 'Editar')
 
 @section('content')
 

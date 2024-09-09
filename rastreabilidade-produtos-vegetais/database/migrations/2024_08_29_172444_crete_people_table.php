@@ -15,20 +15,20 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email');
-            $table->string('razao_social');
+            $table->string('razao_social')->nullabe();
             $table->string('cpf');
             $table->string('cnpj');
-            $table->string('cgc');
-            $table->string('nome_fantasia');
+            $table->string('cgc')->nullabe();
+            $table->string('nome_fantasia')->nullabe();
             $table->string('tipo_endereco');
             $table->string('endereco');
             $table->string('tipo_pessoa');
-            $table->string('telefone');
-            $table->string('website');
+            $table->string('telefone')->nullabe();
+            $table->string('website')->nullabe();
             $table->string('tipo_perfil');
-            $table->string('mapa');
-            $table->string('imagem_aerea');
-            $table->string('imagem_perfil');
+            $table->string('mapa')->nullabe();
+            $table->string('imagem_aerea')->nullabe();
+            $table->string('imagem_perfil')->nullabe();
             $table->timestamps();
         });
     }

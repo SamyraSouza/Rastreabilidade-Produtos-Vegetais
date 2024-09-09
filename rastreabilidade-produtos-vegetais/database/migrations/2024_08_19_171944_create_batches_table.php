@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('batchs', function (Blueprint $table) {
+        Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->date('dt_producao');
-            $table->date('dt_variedade');
+            $table->date('dt_producao')->nullabe();
+            $table->date('dt_variedade')->nullabe();
             $table->boolean('producao_ecologica');
             $table->boolean('producao_sustentavel');
             $table->boolean('status');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('batchs');
+        Schema::dropIfExists('batches');
     }
 };

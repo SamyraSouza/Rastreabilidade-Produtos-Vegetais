@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('batchs', function (Blueprint $table) {
+        Schema::table('batches', function (Blueprint $table) {
             $table->foreignId('products_id')->constrained();
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('batchs', function (Blueprint $table) {
+        Schema::table('batches', function (Blueprint $table) {
             $table->foreingId('products_id')
             ->contrained()
             ->onDelete('cascade');

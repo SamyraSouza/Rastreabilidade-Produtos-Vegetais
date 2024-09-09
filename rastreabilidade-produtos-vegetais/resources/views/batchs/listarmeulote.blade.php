@@ -19,7 +19,7 @@
 
 <div class="container-fluid py-4 mt-7">
 @if(session('msg'))
-<div class="alert alert-success" role="alert">
+<div class="alert alert-success" role="alert" style="z-index:0;">
    <span class="light">{{session('msg')}}</span> 
 </div>
  @endif
@@ -27,20 +27,20 @@
 
   @if(count($batchs)==0 && $search)
 
-  <div class="alert alert-danger" role="alert"><div class="light">
+  <div class="alert alert-danger" role="alert"><div class="light" style="z-index:0;">
   Não foi possível encontrar nenhum lote no código de: {{$search}}. Veja os lotes diponíveis <a class="forte" href="/batc">Aqui</a></div>
 </div>
 
   @elseif(count($batchs)==0)
 
-<div class="alert alert-danger" role="alert">
+<div class="alert alert-danger" role="alert" style="z-index:0;">
   <div class="light">Não há lotes disponíveis.</div>
 </div>
  
 @else
 
 @if(count($batchs)!=0 && $search)
-<div class="alert alert-light" role="alert">
+<div class="alert alert-light" role="alert" style="z-index:0;">
    <span>Buscando por: {{$search}}</span> 
 </div>
 @endif

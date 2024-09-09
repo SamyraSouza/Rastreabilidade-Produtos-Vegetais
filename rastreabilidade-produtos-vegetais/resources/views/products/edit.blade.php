@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
-@section('title', 'Editando ' . $product->name)
+@section('title', 'Editando')
 
-@section('page', 'Editar Produto - '. $product->name)
+@section('page', 'Editar')
 
 @section('content')
 

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('people', function (Blueprint $table) {
-            $table->string('imagem_fundo')->nullabe();
+        Schema::table('products', function (Blueprint $table) {
+            $table->foreignId('products_id')->constrained();
         });
     }
 
@@ -21,8 +21,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('people', function (Blueprint $table) {
-            //
+        Schema::table('products', function (Blueprint $table) {
+            $table->foreingId('products_id')
+            ->contrained()
+            ->onDelete('cascade');
         });
     }
 };
