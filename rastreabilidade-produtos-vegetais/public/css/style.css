@@ -92,10 +92,16 @@
 }
 
 
-    #fecho{
-        display: none;
-    }
+#fecho{
+    display: none;
+}
 
+.cont{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 @media (max-width: 1200px) {
     #lado{

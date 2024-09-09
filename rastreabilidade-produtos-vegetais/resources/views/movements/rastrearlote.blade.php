@@ -15,7 +15,8 @@
     </div>
 @endif
 
-      <div class="row mb-4" style="display: flex; width:100%;">
+<div class="cont">
+      <div class="row mb-4" style="display: flex; width:80%;">
           <div class="card mb-4" style=" width:100%;">
             <div class="card-header pb-4">
 
@@ -101,5 +102,5 @@
 </div>
 
 </div>
-
+</div>
 @endsection

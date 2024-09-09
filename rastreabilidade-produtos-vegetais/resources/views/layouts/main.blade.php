@@ -29,6 +29,7 @@
 
     <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 back position-absolute w-100"></div>
+  @if(@session('autenticado') == true)
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="lado">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -55,11 +56,12 @@
             </h5>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionRental">
               <div class="accordion-body text-sm opacity-8">
+                @if(@session('adm') == true)
               <a class="nav-link link-nav" href="/products">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             </div>
             <span class="nav-link-text ms-1">Listar Produto</span>
-          </a>
+          </a>@endif
 
           <a class="nav-link link-nav" href="/product/create">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -83,10 +85,12 @@
             </h5>
             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionRental" style="">
               <div class="accordion-body text-sm opacity-8">
+                @if(@session('adm') == true)
               <a class="nav-link link-nav" href="/batchs">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">            
-            </div>
+            </div>          
             <span class="nav-link-text ms-1">Listar Lote</span>
+            @endif
           </a>
 
           <a class="nav-link link-nav" href="/batch/create">
@@ -117,12 +121,12 @@
               Movimentação
         </div>
         </p>
-    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">  @if(@session('adm') == true)
           <a class="nav-link link-nav" href="/movements">
             <div class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center" style="margin-left: -60px;">            
             </div>
             <span class="nav-link-text ms-1 na">Listar Movimentações</span>
-          </a>
+          </a>@endif
 
           <a class="nav-link link-nav" href="/movement/create">
             <div class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center" style="margin-left: -60px;">
@@ -159,7 +163,7 @@
     </div>
 
   </aside>
-
+@endif
     <!-- Navbar --> 
   <main class="main-content position-relative border-radius-lg ">
     
