@@ -1,7 +1,7 @@
 # Rastreabilidade de Produtos Vegetais
 
 O projeto é um sistema de controle de produtos agrícolas, ele permite o CRUD de produtos, lotes, movimentações, rastreio desses lotes, cadastro e permissão para usuários, formação de etiqueta com QRCode para cada lote, geração de código automático para cada produto/lote.
-
+O objetivo principal do projeto é aimmplementação do framework Laravel, uso do Ajax e melhorar os estudos em relações de tabelas do banco de dados MySQL.
 ## Página rastreamento sem login
 
 ![Captura de tela 2024-09-10 171356](https://github.com/user-attachments/assets/642b58f8-f518-4e57-9f74-59a1c9cb677b)
