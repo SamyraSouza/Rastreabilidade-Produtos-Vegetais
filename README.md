@@ -14,3 +14,6 @@ O projeto é um sistema de controle de produtos agrícolas, ele permite o CRUD d
 
 ![Captura de tela 2024-09-10 171453](https://github.com/user-attachments/assets/090f277d-620b-4524-9f9a-d603b9fa64a6)
 
+## PDF Lote (cadastro aleatório)
+
+![Captura de tela 2024-09-10 171811](https://github.com/user-attachments/assets/6cc4d346-b4c1-40fb-bc95-e01a4ee18a35)
