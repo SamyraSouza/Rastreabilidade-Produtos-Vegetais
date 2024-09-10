@@ -79,7 +79,6 @@ class BatchController extends Controller
         })->first();
 
 
-
         $batch = new Batch;
 
         $batch->status = $request->status;
@@ -90,6 +89,7 @@ class BatchController extends Controller
         $batch->producao_sustentavel = $request->producao_sustentavel;
         $batch->people_id = $person->id;
 
+        
 
         if($request->code){
             $batch->code = $request->code;

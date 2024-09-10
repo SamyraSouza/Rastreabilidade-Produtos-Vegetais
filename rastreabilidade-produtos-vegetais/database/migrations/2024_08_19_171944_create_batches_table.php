@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->date('dt_producao')->nullabe();
-            $table->date('dt_variedade')->nullabe();
+            $table->date('dt_producao')->nullable();
+            $table->date('dt_validade')->nullable();
             $table->boolean('producao_ecologica');
             $table->boolean('producao_sustentavel');
             $table->boolean('status');

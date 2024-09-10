@@ -256,9 +256,8 @@ $('#codeproduct').blur(function (e) {
       if(result!="n"){
           Swal.fire({
               icon: "error",
-              title: "Oops...",
-              text: "Este código já está cadastrado em outro produto!", 
-              html: `<a href="/products/`+result+`" autofocus>Ver Produto</a>`,          
+              title: "Este código já está cadastrado em outro produto!",
+              html: `<a href="/products/`+result+`" autofocus>Ver Produto</a>`        
             });
 
       $('#bot').hide();
