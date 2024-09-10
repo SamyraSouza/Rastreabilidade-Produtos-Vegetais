@@ -198,7 +198,7 @@
             
                           <div id="bot">
                         <div class="d-flex justify-content-center">
-                         <input type="submit" class="btn btn-dark mt-3 mb-5 col-md-2 d-flex" value="Cadastar"> 
+                         <input type="submit" class="btn btn-dark mt-3 mb-5" value="Cadastar"> 
                         </div></div>
                           </div>
                         </div>

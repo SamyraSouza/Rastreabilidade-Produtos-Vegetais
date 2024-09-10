@@ -22,7 +22,7 @@ function mostrar(){
 }
 
 function cadastro(){
-  var entrar = document.getElementById('entrar');
+  var entrar = document.getElementById('ent');
   
   if (entrar.style.display === "none" || entrar.style.display === "") {
     entrar.style.display = "block"; 
@@ -272,6 +272,7 @@ $('#codeproduct').blur(function (e) {
 });
 
 // validar código lote
+
 $('#codebatch').blur(function (e) { 
 
   e.preventDefault();
@@ -302,18 +303,6 @@ $('#codebatch').blur(function (e) {
   }
   });
 });
-
-function saveAsPNG() {
-
-  var element =  document.getElementById('qrcode');
-
-  html2canvas(element).then(function(canvas) {
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL("/img");
-    link.download = 'qrcode.png';
-    link.click();
-  });
-}
 
 
 function abrir(){

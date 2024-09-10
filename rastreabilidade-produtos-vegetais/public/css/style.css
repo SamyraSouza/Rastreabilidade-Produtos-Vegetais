@@ -102,9 +102,10 @@
     align-items: center;
     justify-content: center;
 }
-
-#cadastro{
+#ent{
     display: none;
+    z-index: 999;
+    transition: all 0.2s ease-in-out;
 }
 
 @media (max-width: 1200px) {
@@ -146,10 +147,6 @@
     #imgs{
         margin-top: 20px;
     }
-    #cadastro{
-        display: block;
-        margin-left: 120%;
-    }
     #rastreio{
         width: 100% !important;
     }
@@ -157,3 +154,13 @@
         width: 100%;
     }
 }
+@media (max-width: 576px) {
+    #cadastro{
+        display: block !important;
+        
+    }
+    #cad{
+        display: none;
+    }
+}
+

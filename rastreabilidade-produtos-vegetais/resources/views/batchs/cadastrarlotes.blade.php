@@ -35,7 +35,7 @@
                 <div class="col-md-6">
                      <label for="products_id">Selecione o Produto:</label>
                   <div class="form-group">
-            <select required name="products_id" id="products_id"  class="js-example-basic-single" style="width:300px;">
+            <select required name="products_id" id="products_id"  class="js-example-basic-single" style="width:200px;">
             <option value="">Selecione</option>     
 
             @foreach($products as $product)  
@@ -109,7 +109,7 @@
     
                 <div id="bot">
                 <div class="d-flex justify-content-center">
-                 <input type="submit" class="btn btn-success mt-5 mb-5 col-md-2 d-flex" value="Criar Lote"> 
+                 <input type="submit" class="btn btn-success mt-5 mb-5 d-flex" value="Criar Lote"> 
                 </div>
               </div>
                   </div>

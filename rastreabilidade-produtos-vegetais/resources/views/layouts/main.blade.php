@@ -153,11 +153,12 @@
         @else
         <span class="nav-link-text ms-1">Pessoas Não Cadastradas <i class="fa fa-warning icon"></i></span>      
         @endif 
-      @endif             
+                  
       </a>
       <a href="/sair" class="nav-link text-white font-weight-bold px-0" style=" width: 60px;">
         <span style="color:rgb(255, 39, 39);display:none; text-align:center; margin-left:18px" id="sair">Sair <i class="fa fa-sign-out" aria-hidden="true"></i></span>
       </a>
+      @endif 
    @endif
  </div>
   </div>
@@ -165,7 +166,34 @@
     </div>
 
   </aside>
+
+@else
+<aside class="bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="ent" style="display: none">
+  <div class="sidenav-header">
+    <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+    <a class="navbar-brand mt-4 d-flex justify-content-center align-middle" href="/index">
+      <img src="/img/logistica.png" class="navbar-brand-img h-100" alt="main_logo">
+      <span class=" font-weight-bold mt-2" style="margin-left: 10px;">TSN Logística</span>
+    </a>
+  </div>
+
+  <hr class="horizontal dark mt-0">
+
+  <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+    <ul class="navbar-nav">
+
+        <a class="d-flex justify-content-center nav-link-text ms-1 mb-3 mt-3 link-nav" href="/login">
+          Entrar
+        </a>
+        <a class="d-flex justify-content-center nav-link-text ms-1 mb-3 mt-3 link-nav" href="/cadastro">Cadastrar</a>           
+
+    </ul>
+  </div>
+
+</aside>
 @endif
+
+
     <!-- Navbar --> 
   <main class="main-content position-relative border-radius-lg ">
     
@@ -175,17 +203,7 @@
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Página</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">@yield('page')</li>
-            @if(@session('autenticado') != true)
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center" id="cadastro" onclick="cadatro()">
-              <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line bg-white"></i>
-                  <i class="sidenav-toggler-line bg-white"></i>
-                  <i class="sidenav-toggler-line bg-white"></i>
-                </div>
-              </a>
-            </li>
-            @endif
+           
           </ol>
           <h6 class="font-weight-bolder text-white mb-0">@yield('page')</h6>
         </nav>
@@ -210,6 +228,7 @@
                         
             </div>    
 
+            
             @else
             <div class="input-group" style="width: 100px; ">
             <a href="/sair" class="nav-link text-white font-weight-bold px-0" style=" width: 60px;">
@@ -217,12 +236,25 @@
               </a>
               @endif
               @else
-              <a href="/login" class="nav-link text-white font-weight-bold px-0" style=" width: 100px;">
+              <a href="/login" class="nav-link text-white font-weight-bold px-0" id="cad" style=" width: 100px;">
                 <span class="d-sm-inline d-none mr-3" style="color:rgb(255, 255, 255);width: 100px; "><i class="fa fa-user-circle" aria-hidden="true"></i>  Entrar</span>
               </a>
-              <a href="/cadastro" class="nav-link text-white font-weight-bold px-0" style=" width: 100px;">
+              <a href="/cadastro" class="nav-link text-white font-weight-bold px-0" id="cad" style=" width: 100px;">
                 <span class="d-sm-inline d-none" style="color:rgb(255, 255, 255);width: 100px; "><i class="fa fa-user-o" aria-hidden="true"></i>  Cadastrar</span>
               </a>
+
+              @if(session('autenticado') != true)
+              <li class="nav-item d-xl-none ps-3 align-items-center" style="display:none;" id="cadastro" onclick="cadastro()">
+                <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                  <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line bg-white"></i>
+                    <i class="sidenav-toggler-line bg-white"></i>
+                    <i class="sidenav-toggler-line bg-white"></i>
+                  </div>
+                </a>
+              </li>
+              @endif
+         
               @endif
 
               @if(session('autenticado') == true)

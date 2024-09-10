@@ -102,7 +102,7 @@
 
             <div id="bot">
             <div class="d-flex justify-content-center">
-             <input type="submit" class="btn btn-success mt-3 mb-5 col-md-2 d-flex" value="Criar Produto"> 
+             <input type="submit" class="btn btn-success mt-3 mb-5 d-flex" value="Criar Produto"> 
             </div>
           </div>
               </div>

@@ -184,7 +184,7 @@
                 </div>
 
             <div class="d-flex justify-content-center">
-             <input type="submit" class="btn btn-dark mt-3 mb-1 col-md-2 d-flex" value="Editar Perfil"> 
+             <input type="submit" class="btn btn-dark mt-3 mb-1 d-flex" value="Editar Perfil"> 
             </div>
               </div>
             </div>
