@@ -9,7 +9,7 @@ use App\Http\Requests\ContactFormRequest;
 use Illuminate\Http\Request;
 use App\Notifications\NewContact;
 use App\Notifications\Forgot;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 
 
@@ -27,41 +27,23 @@ class PersonController extends Controller
 
         $people = Person::WhereNull('permission')->get();
           
-        $teste = Person::where([
+        $user = Person::where([
             ['email', 'like', $request->email]
-        ])->where([
-            ['senha', 'like', $request->senha]
         ])->first();
 
-        $adm = Person::where([
-            ['tipo_perfil', 'like', 'adm']
-        ])->first();
-
-        
-        if($request->email == $adm->email && $request->senha == $adm->senha){
-
+        if($user && password_verify($request->senha, $user->senha)){
             $request->session()->put('autenti', true);
 
             $request->session()->put('autenticado', true);
-
-            $request->session()->put('adm', true);
-
-            return view('/index', ['people' => $people]);
-        }
-        
-        elseif(isset($teste)){
-
-            $request->session()->put('autenti', true);
-
-            $request->session()->put('autenticado', true);
-
-            $request->session()->put('adm', false);
 
             $request->session()->put('email', $request->email);
 
-            return view('/index',['user' => $teste, 'people' => $people]);
+            $request->session()->put('adm', $user->tipo_perfil == "adm");
 
-        } else {
+            return view('/index', ['people' => $people]);
+        }
+
+         else {
             return redirect('/login')->with('msg', 'Email ou senha inválidos.');
         }
     }
@@ -214,12 +196,11 @@ class PersonController extends Controller
 
         $senha = rand(1000,100000);
 
-        $person->senha = $senha;
+        $person->senha = Hash::make($senha);
         
         $person->update();
 
-        Notification::route('mail', $person->email)->notify(new NewContact($person)); 
-    
+        Notification::route('mail', $person->email)->notify(new NewContact($person, $senha)); 
 
         toast('Pessoa permitida com sucesso!','success');
  

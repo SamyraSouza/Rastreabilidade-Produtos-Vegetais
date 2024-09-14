@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Person;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class PersonSeeder extends Seeder
 {
@@ -22,7 +23,7 @@ class PersonSeeder extends Seeder
             'endereco' => 'UNIFAE - São João da Boa Vista',
             'tipo_pessoa' => 'adm',
             'tipo_perfil' => 'adm',
-            'senha' => '1234',
+            'senha' => Hash::make('1234'),
             'permission' => 1
         ]);
 

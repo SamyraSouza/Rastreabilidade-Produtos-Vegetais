@@ -13,14 +13,15 @@ class NewContact extends Notification implements ShouldQueue
     use Queueable;
 
     protected $person;
+    protected $uncryptedpassword;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(Person $person)
+    public function __construct(Person $person, $uncryptedpassword)
     {
         $this->person = $person;
-       
+       $this->uncryptedpassword = $uncryptedpassword;
     }
 
     /**
@@ -42,7 +43,7 @@ class NewContact extends Notification implements ShouldQueue
                     ->line('Seja Bem-Vindo!')
                     ->line('Seu cadastro na TSN Logística foi permitido.')
                     ->line('Para acessar sua conta, use a senha:')
-                    ->line($this->person->senha);
+                    ->line($this->uncryptedpassword);
     }
 
     /**

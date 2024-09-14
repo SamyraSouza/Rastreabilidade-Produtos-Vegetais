@@ -20,9 +20,6 @@ use Illuminate\Support\Facades\Storage;
 
 class BatchController extends Controller
 {
-
-
-
     public function createbatchsid($id){
 
         $people = Person::WhereNull('permission')->get();
