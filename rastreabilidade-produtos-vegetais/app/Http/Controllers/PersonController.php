@@ -40,7 +40,7 @@ class PersonController extends Controller
 
             $request->session()->put('adm', $user->tipo_perfil == "adm");
 
-            return view('/index', ['people' => $people]);
+            return view('/index', ['user' => $user]);
         }
 
          else {
